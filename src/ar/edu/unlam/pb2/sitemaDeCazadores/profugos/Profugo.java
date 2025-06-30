@@ -24,5 +24,4 @@ public class Profugo {
 	public boleean isNervioso() {
 		return nervioso;
 	}
-
 }
