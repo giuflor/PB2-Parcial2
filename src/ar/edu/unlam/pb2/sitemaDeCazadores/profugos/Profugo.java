@@ -21,7 +21,14 @@ public class Profugo {
 	public Integer getHabilidad() {
 		return habilidad;
 	}
-	public boleean isNervioso() {
+	public boolean isNervioso() {
 		return nervioso;
 	}
+	public void reducirInocencia(int puntos) {
+		this.inocencia=Math.max(0,this.inocencia-puntos);
+	}
+	public void reducirHabilidad(int puntos) {
+		this.habilidad=Math.max(0,this.habilidad-puntos);
+	}
+
 }
