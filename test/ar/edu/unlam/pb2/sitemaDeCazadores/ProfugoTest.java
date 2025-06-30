@@ -7,8 +7,8 @@ public class ProfugoTest {
 		assertEquals("Juan",p.getNombre());
 		assertEquals(Integer.valueOf(30),p.getInocencia());
 		assertEquals(Integer.valueOf(75),p.getHabilidad());
-		assertTrue(p.isNevioso());
+		assertTrue(p.isNervioso());
+		
 	}
-	
 
 }
