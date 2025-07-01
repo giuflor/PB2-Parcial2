@@ -40,13 +40,5 @@ public class Zona {
 			}
 		}
 	}
-
 }
 
-//Lo único que necesitás para que todo compile y funcione es:
-
-//Que tu clase CazadorRural extienda una clase Cazador que tenga:
-
-//Un método capturar(IProfugo p) que pueda lanzar ExceptionCapturaFallida.
-
-//Un método getCapturados() que devuelva una colección (por ejemplo Set<IProfugo>).
