@@ -9,6 +9,10 @@ public class CazadorSigiloso extends Cazador {
 		super(nombre, experiencia);
 	}
 
+	public CazadorSigiloso(String nombre) {
+		super(nombre);
+	}
+
 	@Override
 	public boolean puedeCapturar(Profugo profugo) {
 		return profugo.getNivelHabilidad() < 50;

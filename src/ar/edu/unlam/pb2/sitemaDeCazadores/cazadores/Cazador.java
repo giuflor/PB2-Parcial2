@@ -21,6 +21,13 @@ public abstract class Cazador {
 		this.intimidados = new HashSet<>();
 	}
 
+	public Cazador(String nombre) {
+		this.nombre = nombre;
+		this.experiencia = 50;
+		this.capturados = new ArrayList<>();
+		this.intimidados = new HashSet<>();
+	}
+
 	public abstract boolean puedeCapturar(Profugo profugo);
 
 	public void realizarCaptura(Zona zona) throws ExceptionCapturaFallida {

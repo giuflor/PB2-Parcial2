@@ -9,6 +9,10 @@ public class CazadorRural extends Cazador {
 		super(nombre, experiencia);
 	}
 
+	public CazadorRural(String nombre) {
+		super(nombre);
+	}
+
 	@Override
 	public boolean puedeCapturar(Profugo profugo) {
 		return profugo.isNervioso();
