@@ -15,13 +15,13 @@ public class CazadorUrbano extends Cazador {
 
 	@Override
 	public boolean puedeCapturar(Profugo profugo) {
-		return !Profugo.isNervioso();
+		return !profugo.isNervioso();
 	}
 
 	@Override
 	protected void intimidar(Profugo profugo) {
 		profugo.reducirInocencia(2);
-		profugo.setNervioso(false);
+		profugo.setIsNervioso(false);
 	}
 
 }

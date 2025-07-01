@@ -15,13 +15,13 @@ public class CazadorSigiloso extends Cazador {
 
 	@Override
 	public boolean puedeCapturar(Profugo profugo) {
-		return profugo.getNivelHabilidad() < 50;
+		return profugo.getHabilidad() < 50;
 	}
 
 	@Override
 	protected void intimidar(Profugo profugo) {
 		profugo.reducirInocencia(2);
-		profugo.setNivelHabilidad(Math.max(0, profugo.getNivelHabilidad() - 5));
+		profugo.reducirHabilidad(5);
 	}
 
 }

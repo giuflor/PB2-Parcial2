@@ -32,6 +32,10 @@ public class Profugo implements IProfugo{
 		this.habilidad=Math.max(0,this.habilidad-puntos);
 	}
 	
+	public void setIsNervioso(boolean nervioso) {
+		this.nervioso = nervioso; 
+	}
+	
 	@Override
 	public boolean equals(Object o) {
 		if(!(o instanceof Profugo))return false;
