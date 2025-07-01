@@ -1,6 +1,7 @@
 package ar.edu.unlam.pb2.sitemaDeCazadores.profugos;
 
-public class Profugo {
+
+public class Profugo implements IProfugo{
 	private String nombre;
 	private int inocencia;
 	private int habilidad;
@@ -30,5 +31,19 @@ public class Profugo {
 	public void reducirHabilidad(int puntos) {
 		this.habilidad=Math.max(0,this.habilidad-puntos);
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if(!(o instanceof Profugo))return false;
+		Profugo otro=(Profugo)o;
+		return this.nombre.equals(otro.nombre);	
+	}
+	
+	@Override
+	public int hashCode() {
+		return this.nombre.hashCode();
+	}
 
 }
+
+
