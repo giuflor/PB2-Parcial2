@@ -6,6 +6,10 @@ import java.util.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import ar.edu.unlam.pb2.sitemaDeCazadores.cazadores.CazadorRural;
+import ar.edu.unlam.pb2.sitemaDeCazadores.cazadores.CazadorSigiloso;
+import ar.edu.unlam.pb2.sitemaDeCazadores.cazadores.CazadorUrbano;
+
 public class CazadorTest {
 	protected CazadorUrbano cazadorUrbano;
 	protected CazadorRural cazadorRural;
