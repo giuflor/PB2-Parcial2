@@ -2,7 +2,7 @@ package ar.edu.unlam.pb2.sitemaDeCazadores.cazadores;
 
 import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.Profugo;
 
-public class CazadorSigiloso extends Cazador{
+public class CazadorSigiloso extends Cazador {
 
 	public CazadorSigiloso(String nombre, Integer experiencia) {
 		// TODO Auto-generated constructor stub
@@ -11,14 +11,13 @@ public class CazadorSigiloso extends Cazador{
 
 	@Override
 	public boolean puedeCapturar(Profugo profugo) {
-		// TODO Auto-generated method stub
-		return false;
+		return profugo.getNivelHabilidad() < 50;
 	}
 
 	@Override
 	protected void intimidar(Profugo profugo) {
-		// TODO Auto-generated method stub
-		
+		profugo.reducirInocencia(2);
+		profugo.setNivelHabilidad(Math.max(0, profugo.getNivelHabilidad() - 5));
 	}
 
 }

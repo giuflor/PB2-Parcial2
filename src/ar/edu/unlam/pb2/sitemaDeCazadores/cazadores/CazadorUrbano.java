@@ -11,14 +11,13 @@ public class CazadorUrbano extends Cazador {
 
 	@Override
 	public boolean puedeCapturar(Profugo profugo) {
-		// TODO Auto-generated method stub
-		return false;
+		return !Profugo.isNervioso();
 	}
 
 	@Override
 	protected void intimidar(Profugo profugo) {
-		// TODO Auto-generated method stub
-
+		profugo.reducirInocencia(2);
+		profugo.setNervioso(false);
 	}
 
 }
