@@ -1,44 +1,35 @@
 package ar.edu.unlam.pb2.sitemaDeCazadores.zona;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
-import ar.edu.unlam.pb2.sitemaDeCazadores.cazadores.Cazador;
-import ar.edu.unlam.pb2.sitemaDeCazadores.excepciones.ExceptionCapturaFallida;
-import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.IProfugo;
+import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.Profugo;
 
 public class Zona {
 	private String nombre;
-	private Set<IProfugo> profugos = new HashSet<>();
+	private HashSet<Profugo> profugos;
 
 	public Zona(String nombre) {
 		this.nombre = nombre;
+		this.profugos = new HashSet<>();
+	}
+
+	public void agregarProfugo(Profugo profugo) {
+		this.profugos.add(profugo);
+	}
+
+	public void removerProfugo(Profugo profugo) {
+		this.profugos.remove(profugo);
+	}
+
+	public HashSet<Profugo> getProfugos() {
+		return this.profugos;
 	}
 
 	public String getNombre() {
-		return nombre;
+		return this.nombre;
 	}
 
-	public void agregarProfugo(IProfugo p) {
-		profugos.add(p);
-	}
-
-	public Set<IProfugo> getProfugos() {
-		return profugos;
-	}
-
-	public void operarCaptura(Cazador cazador) {
-		List<IProfugo> copia = new ArrayList<>(profugos);
-		for (IProfugo p : copia) {
-			try {
-				cazador.capturar(p);
-				profugos.remove(p);
-			} catch (ExceptionCapturaFallida e) {
-				// intimidacion ya aplicada
-			}
-		}
+	public boolean contieneProfugo(Profugo profugo) {
+		return this.profugos.contains(profugo);
 	}
 }
-

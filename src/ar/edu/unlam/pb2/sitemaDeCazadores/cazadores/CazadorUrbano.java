@@ -9,15 +9,19 @@ public class CazadorUrbano extends Cazador {
 		super(nombre, experiencia);
 	}
 
+	public CazadorUrbano(String nombre) {
+		super(nombre);
+	}
+
 	@Override
 	public boolean puedeCapturar(Profugo profugo) {
-		return !Profugo.isNervioso();
+		return !profugo.isNervioso();
 	}
 
 	@Override
 	protected void intimidar(Profugo profugo) {
 		profugo.reducirInocencia(2);
-		profugo.setNervioso(false);
+		profugo.setIsNervioso(false);
 	}
 
 }

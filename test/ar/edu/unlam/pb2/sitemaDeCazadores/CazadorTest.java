@@ -9,6 +9,9 @@ import org.junit.Test;
 import ar.edu.unlam.pb2.sitemaDeCazadores.cazadores.CazadorRural;
 import ar.edu.unlam.pb2.sitemaDeCazadores.cazadores.CazadorSigiloso;
 import ar.edu.unlam.pb2.sitemaDeCazadores.cazadores.CazadorUrbano;
+import ar.edu.unlam.pb2.sitemaDeCazadores.excepciones.ExceptionCapturaFallida;
+import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.Profugo;
+import ar.edu.unlam.pb2.sitemaDeCazadores.zona.Zona;
 
 public class CazadorTest {
 	protected CazadorUrbano cazadorUrbano;
@@ -42,22 +45,25 @@ public class CazadorTest {
 
 		this.cazadorRural.realizarCaptura(zona);
 
-		assertEquals((Integer) (58), this.profugo.getNivelInocencia());
-		assertTrue(this.profugo.esNervioso());
+		assertEquals((Integer) (58), this.profugo.getInocencia());
+		assertTrue(this.profugo.isNervioso());
 	}
 
 	@Test
 	public void queElCazadorSumeExperienciaCorrectamente() {
-		Profugo profugoNoCapturable = new Profugo("Dos", 60, 70, true);
+		Profugo profugoNoCapturable = new Profugo("Escapista", 60, 70, true);
 		Zona zona = new Zona("Subterraneo");
-
 		zona.agregarProfugo(this.profugo);
 		zona.agregarProfugo(profugoNoCapturable);
 
 		this.cazadorSigiloso.realizarCaptura(zona);
 
-		// Captura p1 (+2), intimida profugoNoCapturable (mínimo habilidad 70)
-		assertEquals((Integer) (90 + 2 + 70), cazadorSigiloso.getExperiencia());
+		// 90 del cazador, +2 por captura de this.profugo,
+		// +70 por intimidación
+		// - 5 por que la intimidación le baja 5 de habilidad al profugoNoCapturable
+		Integer experienciaEsperada = 90 + 2 + 70 - 5;
+
+		assertEquals(experienciaEsperada, cazadorSigiloso.getExperiencia());
 	}
 
 	@Test(expected = ExceptionCapturaFallida.class)
@@ -69,13 +75,14 @@ public class CazadorTest {
 	@Test
 	public void queNoSeIntimideNiSeCaptureUnProfugoConMayorInocenciaQueLaExperienciaDelCazador() {
 		Zona zona = new Zona("Ciudad");
+		Profugo profugo = new Profugo("Super Inocente", 99, 30, false);
 
-		zona.agregarProfugo(this.profugo);
+		zona.agregarProfugo(profugo);
 
 		this.cazadorUrbano.realizarCaptura(zona);
 
-		assertFalse(this.cazadorUrbano.getCapturados().contains(this.profugo));
-		assertTrue(zona.getProfugos().contains(this.profugo));
+		assertFalse(this.cazadorUrbano.contieneCaptura(profugo));
+		assertTrue(zona.contieneProfugo(profugo));
 	}
 
 	@Test
@@ -86,10 +93,12 @@ public class CazadorTest {
 
 		this.cazadorUrbano.realizarCaptura(zona);
 
-		zona.agregarProfugo(this.profugo); // lo volvemos a agregar (no debería volver a capturarlo)
+		// lo volvemos a agregar (no debería volver a capturarlo)
+		zona.agregarProfugo(this.profugo);
 		this.cazadorUrbano.realizarCaptura(zona);
 
-		assertEquals(1, this.cazadorUrbano.getCapturados().size()); // solo una vez
+		// solo una vez
+		assertEquals(1, this.cazadorUrbano.getCapturados().size());
 	}
 
 	@Test
@@ -110,21 +119,20 @@ public class CazadorTest {
 
 	@Test
 	public void queNoSeIntimideAUnProfugoYaIntimidadoEnOtraZona() {
-		CazadorSigiloso cazador = new CazadorSigiloso("Sombra", 100);
-		Profugo profugo = new Profugo("Invisible", 90, 90, true);
+		Profugo profugo = new Profugo("Invisible", 80, 80, true);
 		Zona zona1 = new Zona("Zona A");
 		Zona zona2 = new Zona("Zona B");
 
 		zona1.agregarProfugo(profugo);
-		cazador.realizarCaptura(zona1);
+		this.cazadorSigiloso.realizarCaptura(zona1);
 
-		int habilidadDespues = profugo.getNivelHabilidad();
+		int habilidadDespues = profugo.getHabilidad();
 
 		zona2.agregarProfugo(profugo);
-		cazador.realizarCaptura(zona2);
+		this.cazadorSigiloso.realizarCaptura(zona2);
 
 		// No debería volver a intimidar
-		assertEquals((Integer) habilidadDespues, profugo.getNivelHabilidad());
+		assertEquals((Integer) habilidadDespues, profugo.getHabilidad());
 	}
 
 }
