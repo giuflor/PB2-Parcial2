@@ -1,5 +1,4 @@
 package ar.edu.unlam.pb2.sitemaDeCazadores.agencia;
-package ar.edu.unlam.pb2.sitemaDeCazadores.agencia;
 
 import java.util.ArrayList;
 import java.util.HashSet;

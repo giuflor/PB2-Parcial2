@@ -1,5 +1,4 @@
 package ar.edu.unlam.pb2.sitemaDeCazadores;
-package ar.edu.unlam.pb2.sitemaDeCazadores;
 
 import static org.junit.Assert.assertEquals;
 
