@@ -7,6 +7,12 @@ public class Profugo implements IProfugo {
 	private boolean nervioso;
 
 	public Profugo(String nombre, int inocencia, int habilidad, boolean nervioso) {
+		if (nombre == null || nombre.trim().isEmpty())
+			throw new IllegalArgumentException("El nombre no puede ser nulo o vacío.");
+		if (inocencia < 0)
+			throw new IllegalArgumentException("La inocencia no puede ser negativa.");
+		if (habilidad < 0)
+			throw new IllegalArgumentException("La habilidad no puede ser negativa.");
 		this.nombre = nombre;
 		this.inocencia = inocencia;
 		this.habilidad = habilidad;
