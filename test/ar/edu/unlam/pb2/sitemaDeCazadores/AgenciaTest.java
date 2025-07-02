@@ -151,5 +151,31 @@ public class AgenciaTest {
 
 		assertEquals(1, agencia.getCazadores().size());
 	}
+	
+	@Test
+	public void queLaAgenciaAdministreCazadoresEnVariasZonas() {
+	    Agencia agencia = new Agencia("Agencia Global");
+
+	    CazadorUrbano cazador = new CazadorUrbano("Rick", 80);
+	    agencia.agregarCazador(cazador);
+
+	    Zona zona1 = new Zona("Zona A");
+	    Zona zona2 = new Zona("Zona B");
+
+	    Profugo p1 = new Profugo("Smith", 30, 30, false);
+	    Profugo p2 = new Profugo("John", 30, 30, false);
+
+	    zona1.agregarProfugo(p1);
+	    zona2.agregarProfugo(p2);
+
+	    cazador.realizarCaptura(zona1);
+	    cazador.realizarCaptura(zona2);
+
+	    assertEquals(2, cazador.getCapturados().size());
+	    assertTrue(agencia.obtenerTodosLosProfugosCapturados().contains(p1));
+	    assertTrue(agencia.obtenerTodosLosProfugosCapturados().contains(p2));
+	}
+	
+	
 
 }
