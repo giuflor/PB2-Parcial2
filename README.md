@@ -90,3 +90,13 @@ El proyecto incluye:
 - ✅ queUnCazadorUrbanoSeaIgualQueOtroConElMismoNombre
 
 
+---
+
+### 🧬 **ProfugoEntrenadoTest**
+- ✅ queCazadorIntimideAProfugoEntrenadoYSeReduzcaCorrectamenteLosAtributos
+- ✅ queCazadorPuedaCapturarAProfugoEntrenadoConHabilidadDuplicada
+- ✅ queCazadorNoCaptureNiIntimideSiInocenciaSuperaExperienciaAunConEntrenamiento
+- ✅ queProteccionLegalMantengaMinimoDeInocenciaAlIntimidar
+- ✅ queLaHabilidadNoSupereElMaximoDe100ConArtesMarciales
+
+
