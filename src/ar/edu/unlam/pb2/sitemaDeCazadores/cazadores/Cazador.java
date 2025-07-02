@@ -7,6 +7,7 @@ import java.util.List;
 import ar.edu.unlam.pb2.sitemaDeCazadores.excepciones.ExceptionCapturaFallida;
 import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.IProfugo;
 import ar.edu.unlam.pb2.sitemaDeCazadores.zona.Zona;
+import ar.edu.unlam.pb2.sitemaDeCazadores.excepciones.ExceptionElProfugoYaFueCapturado;
 
 public abstract class Cazador {
 	protected String nombre;
@@ -32,7 +33,7 @@ public abstract class Cazador {
 
 	protected abstract void intimidar(IProfugo profugo);
 
-	public void realizarCaptura(Zona zona) throws ExceptionCapturaFallida {
+	public void realizarCaptura(Zona zona) throws ExceptionCapturaFallida, ExceptionElProfugoYaFueCapturado{
 		if (zona == null) {
 			throw new ExceptionCapturaFallida();
 		}
@@ -42,6 +43,9 @@ public abstract class Cazador {
 		List<Integer> habilidadesIntimidados = new ArrayList<>();
 
 		for (IProfugo profugo : profugosZona) {
+			if (this.contieneCaptura(profugo)) {
+				throw new ExceptionElProfugoYaFueCapturado("El profugo ya fue capturado: " + profugo.getNombre());
+			}
 			if (this.experiencia > profugo.getInocencia() && puedeCapturar(profugo)) {
 				capturados.add(profugo);
 				aCapturar.add(profugo);

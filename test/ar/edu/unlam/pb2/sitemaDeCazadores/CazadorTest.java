@@ -10,6 +10,7 @@ import ar.edu.unlam.pb2.sitemaDeCazadores.cazadores.CazadorRural;
 import ar.edu.unlam.pb2.sitemaDeCazadores.cazadores.CazadorSigiloso;
 import ar.edu.unlam.pb2.sitemaDeCazadores.cazadores.CazadorUrbano;
 import ar.edu.unlam.pb2.sitemaDeCazadores.excepciones.ExceptionCapturaFallida;
+import ar.edu.unlam.pb2.sitemaDeCazadores.excepciones.ExceptionElProfugoYaFueCapturado;
 import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.Profugo;
 import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.IProfugo;
 import ar.edu.unlam.pb2.sitemaDeCazadores.zona.Zona;
@@ -86,8 +87,8 @@ public class CazadorTest {
 		assertTrue(zona.contieneProfugo(profugo));
 	}
 
-	@Test
-	public void queUnCazadorNoRepitaCapturaDelMismoProfugo() {
+	@Test(expected = ExceptionElProfugoYaFueCapturado.class)
+	public void queLanceExceptionSiUnCazadorIntentaCapturarUnMismoProfugoCapturado() throws ExceptionElProfugoYaFueCapturado{
 		Zona zona = new Zona("Centro");
 
 		zona.agregarProfugo(this.profugo);
@@ -97,9 +98,6 @@ public class CazadorTest {
 		// lo volvemos a agregar (no debería volver a capturarlo)
 		zona.agregarProfugo(this.profugo);
 		this.cazadorUrbano.realizarCaptura(zona);
-
-		// solo una vez
-		assertEquals(1, this.cazadorUrbano.getCapturados().size());
 	}
 
 	@Test
