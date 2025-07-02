@@ -1,7 +1,10 @@
 package ar.edu.unlam.pb2.sitemaDeCazadores;
 
-import static org.junit.Assert.*;
-import java.util.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -10,8 +13,8 @@ import ar.edu.unlam.pb2.sitemaDeCazadores.cazadores.CazadorRural;
 import ar.edu.unlam.pb2.sitemaDeCazadores.cazadores.CazadorSigiloso;
 import ar.edu.unlam.pb2.sitemaDeCazadores.cazadores.CazadorUrbano;
 import ar.edu.unlam.pb2.sitemaDeCazadores.excepciones.ExceptionCapturaFallida;
-import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.Profugo;
 import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.IProfugo;
+import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.Profugo;
 import ar.edu.unlam.pb2.sitemaDeCazadores.zona.Zona;
 
 public class CazadorTest {
@@ -134,6 +137,34 @@ public class CazadorTest {
 
 		// No debería volver a intimidar
 		assertEquals((Integer) habilidadDespues, profugo.getHabilidad());
+	}
+	
+	
+	@Test
+	public void queElCazadorCaptureEIntimideEnLaMismaZonaYCalculeBienLaExperiencia() {
+	    // Cazador con experiencia 80
+	    CazadorUrbano cazador = new CazadorUrbano("Rick", 80);
+
+	    // Profugo capturable (inocencia 50 < experiencia 80, no nervioso)
+	    Profugo capturable = new Profugo("Capturable", 50, 40, false);
+
+		// Profugo no capturable pero intimidable (inocencia 50 < experiencia 80, es nervioso)
+	    Profugo intimidar = new Profugo("Intimidar", 50, 60, true);
+
+	    Zona zona = new Zona("Zona Centro");
+	    zona.agregarProfugo(capturable);
+	    zona.agregarProfugo(intimidar);
+
+	    cazador.realizarCaptura(zona);
+
+	    // El capturable debería estar capturado
+	    assertTrue(cazador.getCapturados().contains(capturable));
+	    // El intimidado debería seguir en la zona
+	    assertTrue(zona.getProfugos().contains(intimidar));
+	    // La experiencia esperada es: min habilidad de intimidados (60) + 2 * cantidad de capturas (2 * 1)
+	    Integer experienciaEsperada = 80 + 60 + 2;
+
+	    assertEquals(experienciaEsperada, cazador.getExperiencia());
 	}
 
 }

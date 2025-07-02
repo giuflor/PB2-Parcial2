@@ -12,8 +12,8 @@ import ar.edu.unlam.pb2.sitemaDeCazadores.agencia.Agencia;
 import ar.edu.unlam.pb2.sitemaDeCazadores.cazadores.CazadorRural;
 import ar.edu.unlam.pb2.sitemaDeCazadores.cazadores.CazadorSigiloso;
 import ar.edu.unlam.pb2.sitemaDeCazadores.cazadores.CazadorUrbano;
-import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.Profugo;
 import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.IProfugo;
+import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.Profugo;
 import ar.edu.unlam.pb2.sitemaDeCazadores.zona.Zona;
 
 public class AgenciaTest {
@@ -75,7 +75,7 @@ public class AgenciaTest {
 		cazadorUrbano.realizarCaptura(zona);
 
 		IProfugo masHabil = agencia.obtenerProfugoMasHabilCapturado();
-		
+
 		assertEquals(2, agencia.obtenerTodosLosProfugosCapturados().size()); // 2 profugos capturados
 		assertEquals("Escapista", masHabil.getNombre()); // Escapista es el profugo mas habil capturado
 	}
@@ -102,5 +102,80 @@ public class AgenciaTest {
 		assertEquals(3, agencia.obtenerTodosLosProfugosCapturados().size()); // Total de profugos capturados
 		assertTrue(nombreDelMejorCazador.equals("Rick"));
 	}
-  
+
+	@Test
+	public void queLaAgenciaDevuelvaNullSiNoHayCapturados() {
+		Agencia agencia = new Agencia("Agencia Vacía");
+
+		CazadorUrbano cazador = new CazadorUrbano("Rick", 80);
+		agencia.agregarCazador(cazador);
+
+		assertEquals(null, agencia.obtenerProfugoMasHabilCapturado());
+	}
+
+	@Test
+	public void queLaAgenciaElijaUnoEnCasoDeEmpateDeCapturas() {
+		Agencia agencia = new Agencia("Agencia Empate");
+
+		CazadorUrbano cazador1 = new CazadorUrbano("Rick", 80);
+		CazadorRural cazador2 = new CazadorRural("Daryl", 80);
+
+		agencia.agregarCazador(cazador1);
+		agencia.agregarCazador(cazador2);
+
+		Profugo p1 = new Profugo("Smith", 50, 30, false);
+		Profugo p2 = new Profugo("John", 50, 30, true);
+
+		Zona zona1 = new Zona("Zona 1");
+		Zona zona2 = new Zona("Zona 2");
+
+		zona1.agregarProfugo(p1);
+		zona2.agregarProfugo(p2);
+
+		cazador1.realizarCaptura(zona1);
+		cazador2.realizarCaptura(zona2);
+
+		String nombre = agencia.obtenerCazadorConMasCapturas().getNombre();
+		assertTrue(nombre.equals("Rick") || nombre.equals("Daryl"));
+	}
+
+	@Test
+	public void queNoSeAgreguenCazadoresDuplicadosEnLaAgencia() {
+		Agencia agencia = new Agencia("Seguridad");
+
+		CazadorUrbano cazador1 = new CazadorUrbano("Rick", 80);
+		CazadorUrbano cazador2 = new CazadorUrbano("Rick", 80); // Mismo nombre
+
+		agencia.agregarCazador(cazador1);
+		agencia.agregarCazador(cazador2);
+
+		assertEquals(1, agencia.getCazadores().size());
+	}
+	
+	@Test
+	public void queLaAgenciaAdministreCazadoresEnVariasZonas() {
+	    Agencia agencia = new Agencia("Agencia Global");
+
+	    CazadorUrbano cazador = new CazadorUrbano("Rick", 80);
+	    agencia.agregarCazador(cazador);
+
+	    Zona zona1 = new Zona("Zona A");
+	    Zona zona2 = new Zona("Zona B");
+
+	    Profugo p1 = new Profugo("Smith", 30, 30, false);
+	    Profugo p2 = new Profugo("John", 30, 30, false);
+
+	    zona1.agregarProfugo(p1);
+	    zona2.agregarProfugo(p2);
+
+	    cazador.realizarCaptura(zona1);
+	    cazador.realizarCaptura(zona2);
+
+	    assertEquals(2, cazador.getCapturados().size());
+	    assertTrue(agencia.obtenerTodosLosProfugosCapturados().contains(p1));
+	    assertTrue(agencia.obtenerTodosLosProfugosCapturados().contains(p2));
+	}
+	
+	
+
 }
