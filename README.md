@@ -72,3 +72,21 @@ El proyecto incluye:
 - ✅ queNoSeAgreguenCazadoresDuplicadosEnLaAgencia
 - ✅ queLaAgenciaAdministreCazadoresEnVariasZonas
 
+---
+
+### 🕵️‍♂️ **CazadorTest**
+- ✅ queUnCazadorUrbanoPuedaCapturarUnProfugoNoNerviosoConMenorInocencia
+- ✅ queUnCazadorIntimideSiNoPuedeCapturar
+- ✅ queElCazadorSumeExperienciaCorrectamente
+- ✅ queLanceExcepcionSiZonaEsNula *(ExceptionCapturaFallida)*
+- ✅ queNoSeIntimideNiSeCaptureUnProfugoConMayorInocenciaQueLaExperienciaDelCazador
+- ✅ queLanceExceptionSiUnCazadorIntentaCapturarUnMismoProfugoCapturado *(ExceptionElProfugoYaFueCapturado)*
+- ✅ queSeMantengaElOrdenDeCapturas
+- ✅ queNoSeIntimideAUnProfugoYaIntimidadoEnOtraZona
+- ✅ queElCazadorCaptureEIntimideEnLaMismaZonaYCalculeBienLaExperiencia
+- ✅ queUnCazadorNoPuedaCapturarUnProfugoConHabilidadCero
+- ✅ queUnCazadorNoCaptureSiSuExperienciaEsIgualALaInocenciaDelProfugo
+- ✅ queUnCazadorUrbanoNoSeaIgualQueUnCazadorRuralAunqueTenganElMismoNombre
+- ✅ queUnCazadorUrbanoSeaIgualQueOtroConElMismoNombre
+
+
