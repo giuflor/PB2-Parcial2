@@ -12,8 +12,8 @@ import ar.edu.unlam.pb2.sitemaDeCazadores.agencia.Agencia;
 import ar.edu.unlam.pb2.sitemaDeCazadores.cazadores.CazadorRural;
 import ar.edu.unlam.pb2.sitemaDeCazadores.cazadores.CazadorSigiloso;
 import ar.edu.unlam.pb2.sitemaDeCazadores.cazadores.CazadorUrbano;
-import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.Profugo;
 import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.IProfugo;
+import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.Profugo;
 import ar.edu.unlam.pb2.sitemaDeCazadores.zona.Zona;
 
 public class AgenciaTest {
@@ -75,7 +75,7 @@ public class AgenciaTest {
 		cazadorUrbano.realizarCaptura(zona);
 
 		IProfugo masHabil = agencia.obtenerProfugoMasHabilCapturado();
-		
+
 		assertEquals(2, agencia.obtenerTodosLosProfugosCapturados().size()); // 2 profugos capturados
 		assertEquals("Escapista", masHabil.getNombre()); // Escapista es el profugo mas habil capturado
 	}
@@ -102,5 +102,5 @@ public class AgenciaTest {
 		assertEquals(3, agencia.obtenerTodosLosProfugosCapturados().size()); // Total de profugos capturados
 		assertTrue(nombreDelMejorCazador.equals("Rick"));
 	}
-  
+
 }
