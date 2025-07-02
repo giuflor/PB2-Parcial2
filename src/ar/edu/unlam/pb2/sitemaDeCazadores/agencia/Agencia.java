@@ -45,6 +45,22 @@ public class Agencia {
 		}
 		return masHabil;
 	}
-	
+	public Cazador obtenerCazadorConMasCapturas() {
+		Cazador mejor=null;
+		int maxCapturas=-;
+		
+		for(Cazador cazador:cazadores) {
+			if(cazador.getCapturados().size()>maxCapturas) {
+				maxCapturas=cazador.getCapturados().size();
+				mejor=cazador;
+			}
+		}
+		return mejor;
+	}
+
+	public HashSet<Cazador> getCazadores() {
+		return cazadores;
+	}
+
 
 }
