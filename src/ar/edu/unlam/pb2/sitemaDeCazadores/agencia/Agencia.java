@@ -30,6 +30,21 @@ public class Agencia {
 		return todos;
 	}
 
+	public Profugo obtenerProfugoMasHabilCapturado() {
+
+		Profugo masHabil = null;
+		int maxHabilidad = Integer.MIN_VALUE;
+
+		for (Cazador cazador : cazadores) {
+			for (Profugo profugo : cazador.getCapturados()) {
+				if (profugo.getHabilidad() > maxHabilidad) {
+					maxHabilidad = profugo.getHabilidad();
+					masHabil = profugo;
+				}
+			}
+		}
+		return masHabil;
+	}
 	
 
 }
