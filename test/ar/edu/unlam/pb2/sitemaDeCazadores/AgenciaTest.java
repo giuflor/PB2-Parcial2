@@ -12,6 +12,8 @@ import ar.edu.unlam.pb2.sitemaDeCazadores.agencia.Agencia;
 import ar.edu.unlam.pb2.sitemaDeCazadores.cazadores.CazadorRural;
 import ar.edu.unlam.pb2.sitemaDeCazadores.cazadores.CazadorSigiloso;
 import ar.edu.unlam.pb2.sitemaDeCazadores.cazadores.CazadorUrbano;
+import ar.edu.unlam.pb2.sitemaDeCazadores.excepciones.ExceptionAgenciaSinCazadores;
+import ar.edu.unlam.pb2.sitemaDeCazadores.excepciones.ExceptionAgenciaSinProfugosCapturados;
 import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.Profugo;
 import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.IProfugo;
 import ar.edu.unlam.pb2.sitemaDeCazadores.zona.Zona;
@@ -103,4 +105,14 @@ public class AgenciaTest {
 		assertTrue(nombreDelMejorCazador.equals("Rick"));
 	}
   
+	@Test(expected = ExceptionAgenciaSinProfugosCapturados.class)
+	public void queLaAgenciaLanceExcepcionSiNoHayProfugosCapturados() throws ExceptionAgenciaSinProfugosCapturados {
+		agencia.obtenerProfugoMasHabilCapturado();
+	}
+	
+	@Test(expected = ExceptionAgenciaSinCazadores.class)
+	public void queLaAgenciaLanceExcepcionSiNoHayCazadores() throws ExceptionAgenciaSinCazadores {
+		Agencia agenciaVacia = new Agencia("Agencia Vacia");
+		agenciaVacia.obtenerCazadorConMasCapturas();
+	}
 }
