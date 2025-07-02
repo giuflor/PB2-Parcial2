@@ -55,5 +55,11 @@ public class ProfugoTest {
 	    profugo.reducirHabilidad(10);
 	    assertEquals(Integer.valueOf(0), profugo.getHabilidad());
 	}
+	@Test
+	public void queSePuedaCambiarElEstadoDeNerviosismo() {
+	    Profugo profugo = new Profugo("Jane", 30, 60, true);
+	    profugo.setIsNervioso(false);
+	    assertFalse(profugo.isNervioso());
+	}
 
 }
