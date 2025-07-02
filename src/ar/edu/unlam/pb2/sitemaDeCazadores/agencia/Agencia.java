@@ -47,7 +47,7 @@ public class Agencia {
 	}
 	public Cazador obtenerCazadorConMasCapturas() {
 		Cazador mejor=null;
-		int maxCapturas=-;
+		int maxCapturas=-1;
 		
 		for(Cazador cazador:cazadores) {
 			if(cazador.getCapturados().size()>maxCapturas) {
