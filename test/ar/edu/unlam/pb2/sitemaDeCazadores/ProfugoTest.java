@@ -68,6 +68,13 @@ public class ProfugoTest {
 
 	    assertTrue(profugo1.equals(profugo2));
 	}
+	@Test
+	public void queElHashCodeDeProfugosConElMismoNombreSeaIgual() {
+	    Profugo profugo1 = new Profugo("Smith", 30, 50, false);
+	    Profugo profugo2 = new Profugo("Smith", 40, 60, true);
+
+	    assertEquals(profugo1.hashCode(), profugo2.hashCode());
+	}
 	
 
 }
