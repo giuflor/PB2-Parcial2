@@ -60,3 +60,66 @@ El proyecto incluye:
 
 ## 📦 Diagrama de clases (resumen)
 [![diagrama-agencia-de-cazarecompensas.png](https://i.postimg.cc/76dcN1ym/diagrama-agencia-de-cazarecompensas.png)](https://postimg.cc/sQPwjhxh)
+
+## ✅ Cobertura de Tests (resumen)
+
+### 🏢 **AgenciaTest**
+- ✅ queLaAgenciaObtengaTodosLosProfugosCapturados
+- ✅ queLaAgenciaObtengaElProfugoMasHabilCapturado
+- ✅ queLaAgenciaObtengaElCazadorConMasCapturas
+- ✅ queLaAgenciaDevuelvaNullSiNoHayCapturados
+- ✅ queLaAgenciaElijaUnoEnCasoDeEmpateDeCapturas
+- ✅ queNoSeAgreguenCazadoresDuplicadosEnLaAgencia
+- ✅ queLaAgenciaAdministreCazadoresEnVariasZonas
+
+---
+
+### 🕵️‍♂️ **CazadorTest**
+- ✅ queUnCazadorUrbanoPuedaCapturarUnProfugoNoNerviosoConMenorInocencia
+- ✅ queUnCazadorIntimideSiNoPuedeCapturar
+- ✅ queElCazadorSumeExperienciaCorrectamente
+- ✅ queLanceExcepcionSiZonaEsNula *(ExceptionCapturaFallida)*
+- ✅ queNoSeIntimideNiSeCaptureUnProfugoConMayorInocenciaQueLaExperienciaDelCazador
+- ✅ queLanceExceptionSiUnCazadorIntentaCapturarUnMismoProfugoCapturado *(ExceptionElProfugoYaFueCapturado)*
+- ✅ queSeMantengaElOrdenDeCapturas
+- ✅ queNoSeIntimideAUnProfugoYaIntimidadoEnOtraZona
+- ✅ queElCazadorCaptureEIntimideEnLaMismaZonaYCalculeBienLaExperiencia
+- ✅ queUnCazadorNoPuedaCapturarUnProfugoConHabilidadCero
+- ✅ queUnCazadorNoCaptureSiSuExperienciaEsIgualALaInocenciaDelProfugo
+- ✅ queUnCazadorUrbanoNoSeaIgualQueUnCazadorRuralAunqueTenganElMismoNombre
+- ✅ queUnCazadorUrbanoSeaIgualQueOtroConElMismoNombre
+
+
+---
+
+### 🧬 **ProfugoEntrenadoTest**
+- ✅ queCazadorIntimideAProfugoEntrenadoYSeReduzcaCorrectamenteLosAtributos
+- ✅ queCazadorPuedaCapturarAProfugoEntrenadoConHabilidadDuplicada
+- ✅ queCazadorNoCaptureNiIntimideSiInocenciaSuperaExperienciaAunConEntrenamiento
+- ✅ queProteccionLegalMantengaMinimoDeInocenciaAlIntimidar
+- ✅ queLaHabilidadNoSupereElMaximoDe100ConArtesMarciales
+
+---
+
+### 🧪 **ProfugoTest**
+- ✅ queSePuedaCrearUnProfugo
+- ✅ queSePuedaReducirLaInocenciaYHabilidad
+- ✅ queSePuedaEvolucionarConEntrenamientos
+- ✅ queLaInocenciaNoSeaNegativa
+- ✅ queLaHabilidadNoSeaNegativa
+- ✅ queSePuedaCambiarElEstadoDeNerviosismo
+- ✅ queDosProfugosConElMismoNombreSeanIguales
+- ✅ queElHashCodeDeProfugosConElMismoNombreSeaIgual
+- ✅ queLosAtributosSeGuardenCorrectamente
+
+---
+
+### 🗺 **ZonaTest**
+- ✅ queZonaPermitaCapturarYReducirProfugos
+- ✅ queSeAgregueUnProfugoALaZona
+- ✅ queNoSeAgreguenProfugosDuplicadosALaZona *(ExceptionElProfugoYaEstaEnLaZona)*
+- ✅ queSePuedaRemoverUnProfugoDeLaZona
+- ✅ queNoSePuedaRemoverUnProfugoQueNoEstaEnLaZona *(ExceptionElProfugoNoEstaEnLaZona)*
+- ✅ queLaZonaActualiceElListadoDeProfugosDespuesDeVariasCapturas
+- ✅ queLaZonaPuedaEstarVaciaSinErrores
+

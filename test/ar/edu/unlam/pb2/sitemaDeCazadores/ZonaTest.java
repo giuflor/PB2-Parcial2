@@ -63,6 +63,7 @@ public class ZonaTest {
 		zona.removerProfugo(profugo);
 	}
 
+	@Test
 	public void queLaZonaActualiceElListadoDeProfugosDespuesDeVariasCapturas() {
 		Zona zona = new Zona("Zona Este");
 
