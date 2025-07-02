@@ -19,7 +19,9 @@ public class Zona {
 	}
 
 	public void agregarProfugos(List<IProfugo> profugos) {
-		this.profugos.addAll(profugos);
+		if (profugos != null) {
+			this.profugos.addAll(profugos);
+		}
 	}
 
 	public void removerProfugo(IProfugo profugo) {
