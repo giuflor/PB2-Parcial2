@@ -8,6 +8,7 @@ import java.util.List;
 import org.junit.Test;
 
 import ar.edu.unlam.pb2.sitemaDeCazadores.cazadores.CazadorRural;
+import ar.edu.unlam.pb2.sitemaDeCazadores.excepciones.ExceptionElProfugoNoEstaEnLaZona;
 import ar.edu.unlam.pb2.sitemaDeCazadores.excepciones.ExceptionElProfugoYaEstaEnLaZona;
 import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.IProfugo;
 import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.Profugo;
@@ -47,7 +48,7 @@ public class ZonaTest {
 	}
 
 	@Test
-	public void queSePuedaRemoverUnProfugoDeLaZona() {
+	public void queSePuedaRemoverUnProfugoDeLaZona(){
 		Zona zona = new Zona("Zona Oeste");
 		Profugo profugo = new Profugo("Smith", 30, 40, false);
 
@@ -55,5 +56,13 @@ public class ZonaTest {
 		zona.removerProfugo(profugo);
 
 		assertTrue(zona.getProfugos().isEmpty());
+	}
+	
+	@Test(expected = ExceptionElProfugoNoEstaEnLaZona.class)
+	public void queNoSePuedaRemoverUnProfugoQueNoEstaEnLaZona() throws ExceptionElProfugoNoEstaEnLaZona{
+		Zona zona = new Zona("Zona Oeste");
+		Profugo profugo = new Profugo("Smith", 30, 40, false);
+
+		zona.buscarYRemoverProfugo(profugo);
 	}
 }
