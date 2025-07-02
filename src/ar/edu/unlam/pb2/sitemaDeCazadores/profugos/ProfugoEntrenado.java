@@ -8,7 +8,8 @@ public class ProfugoEntrenado implements IProfugo {
 	private boolean proteccionLegal = false;
 
 	public ProfugoEntrenado(IProfugo base) {
-		this.base = base;
+	    if (base == null) throw new IllegalArgumentException("El prófugo base no puede ser nulo.");
+	    this.base = base;
 	}
 
 	public void entrenarEnArtesMarciales() {
@@ -21,6 +22,18 @@ public class ProfugoEntrenado implements IProfugo {
 
 	public void recibirProteccionLegal() {
 		this.proteccionLegal = true;
+	}
+	
+	public boolean tieneProteccionLegal() {
+	    return proteccionLegal;
+	}
+
+	public boolean esElite() {
+	    return elite;
+	}
+
+	public boolean sabeArtesMarciales() {
+	    return artesMarciales;
 	}
 
 	@Override
