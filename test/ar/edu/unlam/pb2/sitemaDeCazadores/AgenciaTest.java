@@ -97,4 +97,5 @@ public class AgenciaTest {
 
 		assertTrue(nombreDelMejorCazador.equals("Rick") || nombreDelMejorCazador.equals("Ghost"));
 	}
+  
 }
