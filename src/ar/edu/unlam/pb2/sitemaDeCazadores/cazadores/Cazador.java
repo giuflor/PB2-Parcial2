@@ -78,18 +78,15 @@ public abstract class Cazador {
 		return new ArrayList<IProfugo>(capturados);
 	}
 
-	public void agregarCaptura(IProfugo profugo) {
-		if (!capturados.contains(profugo)) {
-			capturados.add(profugo);
-		} else {
-			throw new RuntimeException("El prófugo ya fue capturado.");
-		}
-	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (!(obj instanceof Cazador))
 			return false;
+		if (obj.getClass() != this.getClass()) {
+			return false;
+		}
+
 		Cazador otro = (Cazador) obj;
 		return this.nombre.equals(otro.nombre);
 	}
