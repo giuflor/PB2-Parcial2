@@ -11,13 +11,14 @@ import ar.edu.unlam.pb2.sitemaDeCazadores.cazadores.CazadorSigiloso;
 import ar.edu.unlam.pb2.sitemaDeCazadores.cazadores.CazadorUrbano;
 import ar.edu.unlam.pb2.sitemaDeCazadores.excepciones.ExceptionCapturaFallida;
 import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.Profugo;
+import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.IProfugo;
 import ar.edu.unlam.pb2.sitemaDeCazadores.zona.Zona;
 
 public class CazadorTest {
 	protected CazadorUrbano cazadorUrbano;
 	protected CazadorRural cazadorRural;
 	protected CazadorSigiloso cazadorSigiloso;
-	protected Profugo profugo;
+	protected IProfugo profugo;
 
 	@Before
 	public void setUp() {
@@ -112,7 +113,7 @@ public class CazadorTest {
 
 		this.cazadorUrbano.realizarCaptura(zona);
 
-		List<Profugo> capturados = this.cazadorUrbano.getCapturados();
+		List<IProfugo> capturados = this.cazadorUrbano.getCapturados();
 		assertEquals("Uno", capturados.get(0).getNombre());
 		assertEquals("Dos", capturados.get(1).getNombre());
 	}
