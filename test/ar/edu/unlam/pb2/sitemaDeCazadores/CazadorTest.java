@@ -165,4 +165,19 @@ public class CazadorTest {
 		assertTrue(zona.contieneProfugo(profugo));
 	}
 
+	@Test
+	public void queUnCazadorUrbanoNoSeaIgualQueUnCazadorRuralAunqueTenganElMismoNombre() {
+		CazadorUrbano cazadorUrbano = new CazadorUrbano("Hunter", 100);
+		CazadorRural cazadorRural = new CazadorRural("Hunter", 100);
+
+		assertNotEquals(cazadorUrbano, cazadorRural);
+	}
+
+	@Test
+	public void queUnCazadorUrbanoSeaIgualQueOtroConElMismoNombre() {
+		CazadorUrbano cazadorUrbano = new CazadorUrbano("Hunter", 100);
+		CazadorUrbano cazadorUrbano2 = new CazadorUrbano("Hunter", 100);
+
+		assertEquals(cazadorUrbano, cazadorUrbano2);
+	}
 }
