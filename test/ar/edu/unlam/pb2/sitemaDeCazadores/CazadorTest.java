@@ -136,4 +136,33 @@ public class CazadorTest {
 		assertEquals((Integer) habilidadDespues, profugo.getHabilidad());
 	}
 
+	@Test
+	public void queUnCazadorNoPuedaCapturarUnProfugoConHabilidadCero() {
+		Profugo profugoIncapaz = new Profugo("Incapaz", 0, 0, false);
+		Zona zona = new Zona("Desierto");
+
+		zona.agregarProfugo(profugoIncapaz);
+
+		this.cazadorRural.realizarCaptura(zona);
+
+		// El profugo no debería ser capturado ni intimidado
+		assertEquals((Integer) 0, profugoIncapaz.getInocencia());
+		assertEquals((Integer) 0, profugoIncapaz.getHabilidad());
+		assertFalse(this.cazadorRural.contieneCaptura(profugoIncapaz));
+		assertTrue(zona.contieneProfugo(profugoIncapaz));
+	}
+
+	@Test
+	public void queUnCazadorNoCaptureSiSuExperienciaEsIgualALaInocenciaDelProfugo() {
+		Profugo profugo = new Profugo("Empate", 80, 50, false);
+		Zona zona = new Zona("Plaza");
+
+		zona.agregarProfugo(profugo);
+
+		this.cazadorUrbano.realizarCaptura(zona);
+
+		assertFalse(this.cazadorUrbano.contieneCaptura(profugo));
+		assertTrue(zona.contieneProfugo(profugo));
+	}
+
 }
