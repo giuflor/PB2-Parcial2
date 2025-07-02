@@ -84,7 +84,7 @@ public class AgenciaTest {
 	}
 
 	@Test
-	public void queLaAgenciaObtengaElCazadorConMasCapturas() {
+	public void queLaAgenciaObtengaElCazadorConMasCapturas() throws ExceptionAgenciaSinCazadores, ExceptionAgenciaSinProfugosCapturados {
 		Profugo p1 = new Profugo("Smith", 50, 30, false);
 		Profugo p2 = new Profugo("Escapista", 40, 49, true);
 		Profugo p3 = new Profugo("Rápido", 30, 20, false);

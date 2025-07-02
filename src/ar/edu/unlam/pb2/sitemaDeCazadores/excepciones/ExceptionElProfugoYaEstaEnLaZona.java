@@ -1,6 +1,6 @@
 package ar.edu.unlam.pb2.sitemaDeCazadores.excepciones;
 
-public class ExceptionElProfugoYaEstaEnLaZona extends Exception {
+public class ExceptionElProfugoYaEstaEnLaZona extends RuntimeException {
 
 	/**
 	 * 

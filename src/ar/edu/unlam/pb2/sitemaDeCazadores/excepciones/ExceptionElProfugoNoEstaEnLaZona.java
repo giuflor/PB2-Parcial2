@@ -1,6 +1,6 @@
 package ar.edu.unlam.pb2.sitemaDeCazadores.excepciones;
 
-public class ExceptionElProfugoNoEstaEnLaZona extends Exception {
+public class ExceptionElProfugoNoEstaEnLaZona extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 
