@@ -60,3 +60,15 @@ El proyecto incluye:
 
 ## 📦 Diagrama de clases (resumen)
 [![diagrama-agencia-de-cazarecompensas.png](https://i.postimg.cc/76dcN1ym/diagrama-agencia-de-cazarecompensas.png)](https://postimg.cc/sQPwjhxh)
+
+## ✅ Cobertura de Tests (resumen)
+
+### 🏢 **AgenciaTest**
+- ✅ queLaAgenciaObtengaTodosLosProfugosCapturados
+- ✅ queLaAgenciaObtengaElProfugoMasHabilCapturado
+- ✅ queLaAgenciaObtengaElCazadorConMasCapturas
+- ✅ queLaAgenciaDevuelvaNullSiNoHayCapturados
+- ✅ queLaAgenciaElijaUnoEnCasoDeEmpateDeCapturas
+- ✅ queNoSeAgreguenCazadoresDuplicadosEnLaAgencia
+- ✅ queLaAgenciaAdministreCazadoresEnVariasZonas
+
