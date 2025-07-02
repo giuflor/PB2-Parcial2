@@ -99,4 +99,18 @@ El proyecto incluye:
 - ✅ queProteccionLegalMantengaMinimoDeInocenciaAlIntimidar
 - ✅ queLaHabilidadNoSupereElMaximoDe100ConArtesMarciales
 
+---
+
+### 🧪 **ProfugoTest**
+- ✅ queSePuedaCrearUnProfugo
+- ✅ queSePuedaReducirLaInocenciaYHabilidad
+- ✅ queSePuedaEvolucionarConEntrenamientos
+- ✅ queLaInocenciaNoSeaNegativa
+- ✅ queLaHabilidadNoSeaNegativa
+- ✅ queSePuedaCambiarElEstadoDeNerviosismo
+- ✅ queDosProfugosConElMismoNombreSeanIguales
+- ✅ queElHashCodeDeProfugosConElMismoNombreSeaIgual
+- ✅ queLosAtributosSeGuardenCorrectamente
+
+
 
