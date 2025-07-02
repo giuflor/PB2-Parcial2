@@ -17,11 +17,11 @@ public class Zona {
 	public void agregarProfugo(IProfugo profugo) {
 		this.profugos.add(profugo);
 	}
-	
+
 	public void agregarProfugos(List<IProfugo> profugos) {
 		this.profugos.addAll(profugos);
 	}
-	
+
 	public void removerProfugo(IProfugo profugo) {
 		this.profugos.remove(profugo);
 	}
