@@ -38,9 +38,9 @@ public class Profugo implements IProfugo{
 	
 	@Override
 	public boolean equals(Object o) {
-		if(!(o instanceof Profugo))return false;
-		Profugo otro=(Profugo)o;
-		return this.nombre.equals(otro.nombre);	
+		if(!(o instanceof IProfugo))return false;
+		IProfugo otro=(IProfugo)o;
+		return this.nombre.equals(otro.getNombre());	
 	}
 	
 	@Override

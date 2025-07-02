@@ -66,5 +66,15 @@ public class ProfugoEntrenado implements IProfugo {
 		base.setIsNervioso(nervioso);
 	}
 	
-
+	@Override
+	public boolean equals(Object o) {
+		if(!(o instanceof IProfugo))return false;
+		IProfugo otro=(IProfugo)o;
+		return this.base.getNombre().equals(otro.getNombre());	
+	}
+	
+	@Override
+	public int hashCode() {
+		return this.base.getNombre().hashCode();
+	}
 }
