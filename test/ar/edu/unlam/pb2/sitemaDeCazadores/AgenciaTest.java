@@ -66,5 +66,40 @@ public class AgenciaTest {
         Profugo masHabil = agencia.obtenerProfugoMasHabilCapturado();
         assertEquals("Escapista", masHabil.getNombre());
     }
+	
+	@Test
+    public void queLaAgenciaObtengaElCazadorConMasCapturas() {
+        Profugo p1 = new Profugo("Smith", 50, 30, false);
+        Profugo p2 = new Profugo("Escapista", 40, 70, true);
+        Profugo p3 = new Profugo("Rápido", 30, 20, false);
+
+        Zona zona = new Zona("Ciudad");
+        zona.agregarProfugo(p1);
+        zona.agregarProfugo(p2);
+        zona.agregarProfugo(p3);
+
+        cazadorUrbano.realizarCaptura(zona);
+        cazadorSigiloso.realizarCaptura(zona);
+
+        // Verificamos que el cazador con más capturas sea Rick o Ghost según resultado
+        String nombreDelMejorCazador = agencia.obtenerCazadorConMasCapturas().getNombre();
+
+        assertTrue(nombreDelMejorCazador.equals("Rick") || nombreDelMejorCazador.equals("Ghost"));
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
