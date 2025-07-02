@@ -3,6 +3,7 @@ package ar.edu.unlam.pb2.sitemaDeCazadores.zona;
 import java.util.HashSet;
 import java.util.List;
 
+import ar.edu.unlam.pb2.sitemaDeCazadores.excepciones.ExceptionElProfugoYaEstaEnLaZona;
 import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.IProfugo;
 
 public class Zona {
@@ -17,11 +18,16 @@ public class Zona {
 	public void agregarProfugo(IProfugo profugo) {
 		this.profugos.add(profugo);
 	}
-	
-	public void agregarProfugos(List<IProfugo> profugos) {
+
+	public void agregarProfugos(List<IProfugo> profugos) throws ExceptionElProfugoYaEstaEnLaZona {
+		for (IProfugo profugo : profugos) {
+			if (profugos.contains(profugo)) {
+				throw new ExceptionElProfugoYaEstaEnLaZona(profugo.getNombre() + " ya se encuentra en la zona");
+			}
+		}
 		this.profugos.addAll(profugos);
 	}
-	
+
 	public void removerProfugo(IProfugo profugo) {
 		this.profugos.remove(profugo);
 	}

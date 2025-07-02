@@ -14,6 +14,7 @@ import ar.edu.unlam.pb2.sitemaDeCazadores.cazadores.CazadorSigiloso;
 import ar.edu.unlam.pb2.sitemaDeCazadores.cazadores.CazadorUrbano;
 import ar.edu.unlam.pb2.sitemaDeCazadores.excepciones.ExceptionAgenciaSinCazadores;
 import ar.edu.unlam.pb2.sitemaDeCazadores.excepciones.ExceptionAgenciaSinProfugosCapturados;
+import ar.edu.unlam.pb2.sitemaDeCazadores.excepciones.ExceptionElProfugoYaEstaEnLaZona;
 import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.Profugo;
 import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.IProfugo;
 import ar.edu.unlam.pb2.sitemaDeCazadores.zona.Zona;
@@ -39,7 +40,7 @@ public class AgenciaTest {
 	}
 
 	@Test
-	public void queLaAgenciaObtengaTodosLosProfugosCapturados() {
+	public void queLaAgenciaObtengaTodosLosProfugosCapturados() throws ExceptionElProfugoYaEstaEnLaZona {
 		IProfugo p1 = new Profugo("Smith", 50, 30, true);
 		IProfugo p2 = new Profugo("Escapista", 40, 70, false);
 		IProfugo p3 = new Profugo("Smith 2.0", 60, 40, true);
