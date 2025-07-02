@@ -44,7 +44,8 @@ public class ZonaTest {
 		Profugo profugo = new Profugo("Smith", 30, 40, false);
 
 		// Intentamos agregarlo dos veces y tirará exception
-		zona.agregarProfugos(List.of(profugo, profugo));
+		zona.agregarProfugo(profugo);
+		zona.agregarProfugo(profugo);
 	}
 
 	@Test
@@ -63,6 +64,6 @@ public class ZonaTest {
 		Zona zona = new Zona("Zona Oeste");
 		Profugo profugo = new Profugo("Smith", 30, 40, false);
 
-		zona.buscarYRemoverProfugo(profugo);
+		zona.removerProfugo(profugo);
 	}
 }

@@ -16,7 +16,10 @@ public class Zona {
 		this.profugos = new HashSet<>();
 	}
 
-	public void agregarProfugo(IProfugo profugo) {
+	public void agregarProfugo(IProfugo profugo) throws ExceptionElProfugoYaEstaEnLaZona  {
+		if (profugos.contains(profugo)) {
+			throw new ExceptionElProfugoYaEstaEnLaZona(profugo.getNombre() + " ya se encuentra en la zona");
+		}
 		this.profugos.add(profugo);
 	}
 
@@ -28,12 +31,8 @@ public class Zona {
 		}
 		this.profugos.addAll(profugos);
 	}
-
-	public void removerProfugo(IProfugo profugo){
-		this.profugos.remove(profugo);
-	}
 	
-	public void buscarYRemoverProfugo(IProfugo profugo) throws ExceptionElProfugoNoEstaEnLaZona{
+	public void removerProfugo(IProfugo profugo) throws ExceptionElProfugoNoEstaEnLaZona {
 		if (!this.profugos.contains(profugo)) {
 			throw new ExceptionElProfugoNoEstaEnLaZona(profugo.getNombre() + " no se encuentra en la zona");
 		}
