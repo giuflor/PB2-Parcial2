@@ -8,8 +8,9 @@ public class ProfugoEntrenado implements IProfugo {
 	private boolean proteccionLegal = false;
 
 	public ProfugoEntrenado(IProfugo base) {
-	    if (base == null) throw new IllegalArgumentException("El prófugo base no puede ser nulo.");
-	    this.base = base;
+		if (base == null)
+			throw new IllegalArgumentException("El prófugo base no puede ser nulo.");
+		this.base = base;
 	}
 
 	public void entrenarEnArtesMarciales() {
@@ -23,17 +24,17 @@ public class ProfugoEntrenado implements IProfugo {
 	public void recibirProteccionLegal() {
 		this.proteccionLegal = true;
 	}
-	
+
 	public boolean tieneProteccionLegal() {
-	    return proteccionLegal;
+		return proteccionLegal;
 	}
 
 	public boolean esElite() {
-	    return elite;
+		return elite;
 	}
 
 	public boolean sabeArtesMarciales() {
-	    return artesMarciales;
+		return artesMarciales;
 	}
 
 	@Override
@@ -80,6 +81,19 @@ public class ProfugoEntrenado implements IProfugo {
 	@Override
 	public void setIsNervioso(boolean nervioso) {
 		base.setIsNervioso(nervioso);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (!(o instanceof IProfugo))
+			return false;
+		IProfugo otro = (IProfugo) o;
+		return this.base.getNombre().equals(otro.getNombre());
+	}
+
+	@Override
+	public int hashCode() {
+		return this.base.getNombre().hashCode();
 	}
 
 }

@@ -6,8 +6,8 @@ import java.util.List;
 
 import ar.edu.unlam.pb2.sitemaDeCazadores.excepciones.ExceptionCapturaFallida;
 import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.IProfugo;
-import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.Profugo;
 import ar.edu.unlam.pb2.sitemaDeCazadores.zona.Zona;
+import ar.edu.unlam.pb2.sitemaDeCazadores.excepciones.ExceptionElProfugoYaFueCapturado;
 
 public abstract class Cazador {
 	protected String nombre;
@@ -33,32 +33,37 @@ public abstract class Cazador {
 
 	protected abstract void intimidar(IProfugo profugo);
 
-	public void realizarCaptura(Zona zona) {
+	public void realizarCaptura(Zona zona) throws ExceptionCapturaFallida, ExceptionElProfugoYaFueCapturado {
 		if (zona == null) {
 			throw new ExceptionCapturaFallida();
 		}
 
-		List<Profugo> profugosACapturar = new ArrayList<>();
-		int minHabilidadIntimidado = Integer.MAX_VALUE;
+		List<IProfugo> aCapturar = new ArrayList<>();
+		List<IProfugo> profugosZona = new ArrayList<>(zona.getProfugos());
+		List<Integer> habilidadesIntimidados = new ArrayList<>();
 
-		for (IProfugo profugo : new ArrayList<>(zona.getProfugos())) {
+		for (IProfugo profugo : profugosZona) {
+			if (this.contieneCaptura(profugo)) {
+				throw new ExceptionElProfugoYaFueCapturado("El profugo ya fue capturado: " + profugo.getNombre());
+			}
 			if (this.experiencia > profugo.getInocencia() && puedeCapturar(profugo)) {
 				capturados.add(profugo);
-				profugosACapturar.add((Profugo) profugo);
+				aCapturar.add(profugo);
 			} else if (this.experiencia > profugo.getInocencia() && !intimidados.contains(profugo)) {
 				intimidar(profugo);
 				intimidados.add(profugo);
-				minHabilidadIntimidado = Math.min(minHabilidadIntimidado, profugo.getHabilidad());
+				habilidadesIntimidados.add(profugo.getHabilidad());
 			}
 		}
 
-		for (Profugo profugo : profugosACapturar) {
-			zona.removerProfugo(profugo);
+		// Remover capturados de la zona
+		for (IProfugo p : aCapturar) {
+			zona.removerProfugo(p);
 		}
 
-		int experienciaGanada = (minHabilidadIntimidado == Integer.MAX_VALUE ? 0 : minHabilidadIntimidado)
-				+ (2 * profugosACapturar.size());
-		this.experiencia += experienciaGanada;
+		// Sumar experiencia
+		int minHabilidad = habilidadesIntimidados.stream().min(Integer::compare).orElse(0);
+		this.experiencia += minHabilidad + (2 * aCapturar.size());
 	}
 
 	public boolean contieneCaptura(IProfugo profugo) {
@@ -77,17 +82,14 @@ public abstract class Cazador {
 		return new ArrayList<IProfugo>(capturados);
 	}
 
-	public void agregarCaptura(Profugo profugo) {
-	    if (profugo == null) throw new IllegalArgumentException("El prófugo no puede ser nulo.");
-	    if (!capturados.add(profugo)) {
-	        throw new RuntimeException("El prófugo ya fue capturado.");
-	    }
-	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (!(obj instanceof Cazador))
 			return false;
+		if (obj.getClass() != this.getClass()) {
+			return false;
+		}
+
 		Cazador otro = (Cazador) obj;
 		return this.nombre.equals(otro.nombre);
 	}

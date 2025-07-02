@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 
 import ar.edu.unlam.pb2.sitemaDeCazadores.cazadores.Cazador;
+import ar.edu.unlam.pb2.sitemaDeCazadores.excepciones.ExceptionAgenciaSinCazadores;
+import ar.edu.unlam.pb2.sitemaDeCazadores.excepciones.ExceptionAgenciaSinProfugosCapturados;
 import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.IProfugo;
 
 public class Agencia {
@@ -31,7 +33,7 @@ public class Agencia {
 		return todos;
 	}
 
-	public IProfugo obtenerProfugoMasHabilCapturado() {
+	public IProfugo obtenerProfugoMasHabilCapturado() throws ExceptionAgenciaSinProfugosCapturados {
 
 		IProfugo masHabil = null;
 		int maxHabilidad = -1;
@@ -44,10 +46,17 @@ public class Agencia {
 				}
 			}
 		}
+		if (masHabil == null) {
+			throw new ExceptionAgenciaSinProfugosCapturados();
+		}
 		return masHabil;
 	}
 
-	public Cazador obtenerCazadorConMasCapturas() {
+	public Cazador obtenerCazadorConMasCapturas() throws ExceptionAgenciaSinCazadores{
+		if (cazadores.isEmpty()) {
+			throw new ExceptionAgenciaSinCazadores();
+		}
+		
 		Cazador mejor = null;
 		int maxCapturas = -1;
 

@@ -12,6 +12,9 @@ import ar.edu.unlam.pb2.sitemaDeCazadores.agencia.Agencia;
 import ar.edu.unlam.pb2.sitemaDeCazadores.cazadores.CazadorRural;
 import ar.edu.unlam.pb2.sitemaDeCazadores.cazadores.CazadorSigiloso;
 import ar.edu.unlam.pb2.sitemaDeCazadores.cazadores.CazadorUrbano;
+import ar.edu.unlam.pb2.sitemaDeCazadores.excepciones.ExceptionAgenciaSinCazadores;
+import ar.edu.unlam.pb2.sitemaDeCazadores.excepciones.ExceptionAgenciaSinProfugosCapturados;
+import ar.edu.unlam.pb2.sitemaDeCazadores.excepciones.ExceptionElProfugoYaEstaEnLaZona;
 import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.IProfugo;
 import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.Profugo;
 import ar.edu.unlam.pb2.sitemaDeCazadores.zona.Zona;
@@ -37,7 +40,7 @@ public class AgenciaTest {
 	}
 
 	@Test
-	public void queLaAgenciaObtengaTodosLosProfugosCapturados() {
+	public void queLaAgenciaObtengaTodosLosProfugosCapturados() throws ExceptionElProfugoYaEstaEnLaZona {
 		IProfugo p1 = new Profugo("Smith", 50, 30, true);
 		IProfugo p2 = new Profugo("Escapista", 40, 70, false);
 		IProfugo p3 = new Profugo("Smith 2.0", 60, 40, true);
@@ -81,7 +84,8 @@ public class AgenciaTest {
 	}
 
 	@Test
-	public void queLaAgenciaObtengaElCazadorConMasCapturas() {
+	public void queLaAgenciaObtengaElCazadorConMasCapturas()
+			throws ExceptionAgenciaSinCazadores, ExceptionAgenciaSinProfugosCapturados {
 		Profugo p1 = new Profugo("Smith", 50, 30, false);
 		Profugo p2 = new Profugo("Escapista", 40, 49, true);
 		Profugo p3 = new Profugo("Rápido", 30, 20, false);
@@ -103,14 +107,15 @@ public class AgenciaTest {
 		assertTrue(nombreDelMejorCazador.equals("Rick"));
 	}
 
-	@Test
-	public void queLaAgenciaDevuelvaNullSiNoHayCapturados() {
-		Agencia agencia = new Agencia("Agencia Vacía");
+	@Test(expected = ExceptionAgenciaSinProfugosCapturados.class)
+	public void queLaAgenciaLanceExcepcionSiNoHayProfugosCapturados() throws ExceptionAgenciaSinProfugosCapturados {
+		agencia.obtenerProfugoMasHabilCapturado();
+	}
 
-		CazadorUrbano cazador = new CazadorUrbano("Rick", 80);
-		agencia.agregarCazador(cazador);
-
-		assertEquals(null, agencia.obtenerProfugoMasHabilCapturado());
+	@Test(expected = ExceptionAgenciaSinCazadores.class)
+	public void queLaAgenciaLanceExcepcionSiNoHayCazadores() throws ExceptionAgenciaSinCazadores {
+		Agencia agenciaVacia = new Agencia("Agencia Vacia");
+		agenciaVacia.obtenerCazadorConMasCapturas();
 	}
 
 	@Test
@@ -151,31 +156,29 @@ public class AgenciaTest {
 
 		assertEquals(1, agencia.getCazadores().size());
 	}
-	
+
 	@Test
 	public void queLaAgenciaAdministreCazadoresEnVariasZonas() {
-	    Agencia agencia = new Agencia("Agencia Global");
+		Agencia agencia = new Agencia("Agencia Global");
 
-	    CazadorUrbano cazador = new CazadorUrbano("Rick", 80);
-	    agencia.agregarCazador(cazador);
+		CazadorUrbano cazador = new CazadorUrbano("Rick", 80);
+		agencia.agregarCazador(cazador);
 
-	    Zona zona1 = new Zona("Zona A");
-	    Zona zona2 = new Zona("Zona B");
+		Zona zona1 = new Zona("Zona A");
+		Zona zona2 = new Zona("Zona B");
 
-	    Profugo p1 = new Profugo("Smith", 30, 30, false);
-	    Profugo p2 = new Profugo("John", 30, 30, false);
+		Profugo p1 = new Profugo("Smith", 30, 30, false);
+		Profugo p2 = new Profugo("John", 30, 30, false);
 
-	    zona1.agregarProfugo(p1);
-	    zona2.agregarProfugo(p2);
+		zona1.agregarProfugo(p1);
+		zona2.agregarProfugo(p2);
 
-	    cazador.realizarCaptura(zona1);
-	    cazador.realizarCaptura(zona2);
+		cazador.realizarCaptura(zona1);
+		cazador.realizarCaptura(zona2);
 
-	    assertEquals(2, cazador.getCapturados().size());
-	    assertTrue(agencia.obtenerTodosLosProfugosCapturados().contains(p1));
-	    assertTrue(agencia.obtenerTodosLosProfugosCapturados().contains(p2));
+		assertEquals(2, cazador.getCapturados().size());
+		assertTrue(agencia.obtenerTodosLosProfugosCapturados().contains(p1));
+		assertTrue(agencia.obtenerTodosLosProfugosCapturados().contains(p2));
 	}
-	
-	
 
 }
