@@ -1,7 +1,10 @@
 package ar.edu.unlam.pb2.sitemaDeCazadores;
 
-import static org.junit.Assert.*;
-import java.util.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -10,8 +13,8 @@ import ar.edu.unlam.pb2.sitemaDeCazadores.cazadores.CazadorRural;
 import ar.edu.unlam.pb2.sitemaDeCazadores.cazadores.CazadorSigiloso;
 import ar.edu.unlam.pb2.sitemaDeCazadores.cazadores.CazadorUrbano;
 import ar.edu.unlam.pb2.sitemaDeCazadores.excepciones.ExceptionCapturaFallida;
-import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.Profugo;
 import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.IProfugo;
+import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.Profugo;
 import ar.edu.unlam.pb2.sitemaDeCazadores.zona.Zona;
 
 public class CazadorTest {
