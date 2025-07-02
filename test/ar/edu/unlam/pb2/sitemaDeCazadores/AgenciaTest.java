@@ -102,5 +102,17 @@ public class AgenciaTest {
 		assertEquals(3, agencia.obtenerTodosLosProfugosCapturados().size()); // Total de profugos capturados
 		assertTrue(nombreDelMejorCazador.equals("Rick"));
 	}
+	
+	@Test
+	public void queLaAgenciaDevuelvaNullSiNoHayCapturados() {
+	    Agencia agencia = new Agencia("Agencia Vacía");
+
+	    CazadorUrbano cazador = new CazadorUrbano("Rick", 80);
+	    agencia.agregarCazador(cazador);
+
+	    assertEquals(null, agencia.obtenerProfugoMasHabilCapturado());
+	}
+	
+	
 
 }
