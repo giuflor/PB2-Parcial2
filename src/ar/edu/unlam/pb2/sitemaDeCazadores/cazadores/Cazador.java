@@ -99,3 +99,4 @@ public abstract class Cazador {
 		return nombre.hashCode();
 	}
 }
+
