@@ -71,6 +71,13 @@ public class ProfugoEntrenadoTest {
 		//La inocencia se reduce pero no puede bajar de 40
 		assertEquals(Integer.valueOf(40),entrenado.getInocencia());
 	}
+	@Test
+	public  void queLaHabilidadNoSupereElMaximoDe100ConArtesMarciales() {
+		Profugo base= new Profugo("Guerrero",30,60,false);
+		ProfugoEntrenado entrenado=new ProfugoEntrenado(base);
+		entrenado.entrenarEnArtesMarciales();//habilidad seria 120,pero debe ser como maximo 100
+		assertEquals(Integer.valueOf(100),entrenado.getHabilidad());
+	}
 
 		
 		
