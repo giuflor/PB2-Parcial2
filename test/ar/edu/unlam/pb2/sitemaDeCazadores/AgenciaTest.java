@@ -50,5 +50,21 @@ public class AgenciaTest {
 		List<Profugo> capturados = agencia.obtenerTodosLosProfugosCapturados();
 		assertEquals(2, capturados.size());
 	}
+	
+	@Test
+    public void queLaAgenciaObtengaElProfugoMasHabilCapturado() {
+        Profugo p1 = new Profugo("Smith", 50, 30, false);
+        Profugo p2 = new Profugo("Escapista", 40, 70, true);
+
+        Zona zona = new Zona("Ciudad");
+        zona.agregarProfugo(p1);
+        zona.agregarProfugo(p2);
+
+        cazadorUrbano.realizarCaptura(zona);
+        cazadorSigiloso.realizarCaptura(zona);
+
+        Profugo masHabil = agencia.obtenerProfugoMasHabilCapturado();
+        assertEquals("Escapista", masHabil.getNombre());
+    }
 
 }
