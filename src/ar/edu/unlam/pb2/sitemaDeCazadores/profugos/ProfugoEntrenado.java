@@ -53,18 +53,20 @@ public class ProfugoEntrenado implements IProfugo {
 		}
 		return base.isNervioso();
 	}
+
 	@Override
 	public void reducirInocencia(int puntos) {
 		base.reducirInocencia(puntos);
 	}
+
 	@Override
 	public void reducirHabilidad(int puntos) {
 		base.reducirHabilidad(puntos);
 	}
+
 	@Override
 	public void setIsNervioso(boolean nervioso) {
 		base.setIsNervioso(nervioso);
 	}
-	
 
 }
