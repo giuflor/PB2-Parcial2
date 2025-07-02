@@ -6,6 +6,7 @@ import static org.junit.Assert.assertFalse;
 import org.junit.Test;
 
 import ar.edu.unlam.pb2.sitemaDeCazadores.cazadores.CazadorRural;
+import ar.edu.unlam.pb2.sitemaDeCazadores.cazadores.CazadorUrbano;
 import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.Profugo;
 import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.ProfugoEntrenado;
 import ar.edu.unlam.pb2.sitemaDeCazadores.zona.Zona;
@@ -29,5 +30,18 @@ public class ProfugoEntrenadoTest {
 		assertFalse(entrenado.isNervioso());
 		// La habilidad se duplica con el entrenamiento y deberia seguir duplicada
 		assertEquals(Integer.valueOf(100), entrenado.getHabilidad());
+	}
+	@Test
+	public void queCazadorPuedaCapturarAProfugoEntrenadoConHabilidadDuplicada() {
+		Profugo base= new Profugo("Entrenado 2",40,20,false);
+		ProfugoEntrenado entrenado =new ProfugoEntrenado(base);
+		entrenado.entrenarEnArtesMarciales();//habilidad ahora es 40
+		Zona zona =new Zona("Zona B");
+		zona.agregarProfugo(entrenado);
+		CazadorUrbano cazador=new CazadorUrbano("Urban Elite",60);
+		cazador.realizarCaptura(zona);
+		//deberia capturarlo
+		assertTrue(cazador.getCapturados().contains(entrenado));
+		assertTrue(zona.getProfugos().isEmpty());
 	}
 }
