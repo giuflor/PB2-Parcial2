@@ -5,14 +5,14 @@ import java.util.HashSet;
 import java.util.List;
 
 import ar.edu.unlam.pb2.sitemaDeCazadores.excepciones.ExceptionCapturaFallida;
-import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.Profugo;
+import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.IProfugo;
 import ar.edu.unlam.pb2.sitemaDeCazadores.zona.Zona;
 
 public abstract class Cazador {
 	protected String nombre;
 	protected Integer experiencia;
-	protected HashSet<Profugo> capturados;
-	protected HashSet<Profugo> intimidados;
+	protected HashSet<IProfugo> capturados;
+	protected HashSet<IProfugo> intimidados;
 
 	public Cazador(String nombre, Integer experiencia) {
 		this.nombre = nombre;
@@ -28,20 +28,20 @@ public abstract class Cazador {
 		this.intimidados = new HashSet<>();
 	}
 
-	public abstract boolean puedeCapturar(Profugo profugo);
+	public abstract boolean puedeCapturar(IProfugo profugo);
 
-	protected abstract void intimidar(Profugo profugo);
+	protected abstract void intimidar(IProfugo profugo);
 
 	public void realizarCaptura(Zona zona) throws ExceptionCapturaFallida {
 		if (zona == null) {
 			throw new ExceptionCapturaFallida();
 		}
 
-		List<Profugo> aCapturar = new ArrayList<>();
-		List<Profugo> profugosZona = new ArrayList<>(zona.getProfugos());
+		List<IProfugo> aCapturar = new ArrayList<>();
+		List<IProfugo> profugosZona = new ArrayList<>(zona.getProfugos());
 		List<Integer> habilidadesIntimidados = new ArrayList<>();
 
-		for (Profugo profugo : profugosZona) {
+		for (IProfugo profugo : profugosZona) {
 			if (this.experiencia > profugo.getInocencia() && puedeCapturar(profugo)) {
 				capturados.add(profugo);
 				aCapturar.add(profugo);
@@ -53,7 +53,7 @@ public abstract class Cazador {
 		}
 
 		// Remover capturados de la zona
-		for (Profugo p : aCapturar) {
+		for (IProfugo p : aCapturar) {
 			zona.removerProfugo(p);
 		}
 
@@ -62,7 +62,7 @@ public abstract class Cazador {
 		this.experiencia += minHabilidad + (2 * aCapturar.size());
 	}
 
-	public boolean contieneCaptura(Profugo profugo) {
+	public boolean contieneCaptura(IProfugo profugo) {
 		return capturados.contains(profugo);
 	}
 
@@ -74,11 +74,11 @@ public abstract class Cazador {
 		return experiencia;
 	}
 
-	public ArrayList<Profugo> getCapturados() {
-		return new ArrayList<>(capturados);
+	public ArrayList<IProfugo> getCapturados() {
+		return new ArrayList<IProfugo>(capturados);
 	}
 
-	public void agregarCaptura(Profugo profugo) {
+	public void agregarCaptura(IProfugo profugo) {
 		if (!capturados.contains(profugo)) {
 			capturados.add(profugo);
 		} else {

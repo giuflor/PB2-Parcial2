@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import ar.edu.unlam.pb2.sitemaDeCazadores.cazadores.Cazador;
-import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.Profugo;
+import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.IProfugo;
 
 public class Agencia {
 
@@ -21,21 +21,21 @@ public class Agencia {
 		this.cazadores.add(cazador);
 	}
 
-	public List<Profugo> obtenerTodosLosProfugosCapturados() {
-		List<Profugo> todos = new ArrayList<>();
+	public List<IProfugo> obtenerTodosLosProfugosCapturados() {
+		List<IProfugo> todos = new ArrayList<>();
 		for (Cazador cazador : cazadores) {
 			todos.addAll(cazador.getCapturados());
 		}
 		return todos;
 	}
 
-	public Profugo obtenerProfugoMasHabilCapturado() {
+	public IProfugo obtenerProfugoMasHabilCapturado() {
 
-		Profugo masHabil = null;
+		IProfugo masHabil = null;
 		int maxHabilidad = Integer.MIN_VALUE;
 
 		for (Cazador cazador : cazadores) {
-			for (Profugo profugo : cazador.getCapturados()) {
+			for (IProfugo profugo : cazador.getCapturados()) {
 				if (profugo.getHabilidad() > maxHabilidad) {
 					maxHabilidad = profugo.getHabilidad();
 					masHabil = profugo;
