@@ -75,6 +75,14 @@ public class ProfugoTest {
 
 	    assertEquals(profugo1.hashCode(), profugo2.hashCode());
 	}
-	
+	@Test
+	public void queLosAtributosSeGuardenCorrectamente() {
+	    Profugo profugo = new Profugo("Ana", 50, 80, true);
+
+	    assertEquals("Ana", profugo.getNombre());
+	    assertEquals(Integer.valueOf(50), profugo.getInocencia());
+	    assertEquals(Integer.valueOf(80), profugo.getHabilidad());
+	    assertTrue(profugo.isNervioso());
+	}
 
 }
