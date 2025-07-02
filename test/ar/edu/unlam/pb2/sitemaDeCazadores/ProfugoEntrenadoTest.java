@@ -59,6 +59,18 @@ public class ProfugoEntrenadoTest {
 		assertTrue(zona.getProfugos().contains(entrenado));
 		
 	}
+	@Test
+	public void queProteccionLegalMantengaMinimoDeInocenciaAlIntimidar() {
+		Profugo base= new Profugo("Protegido",42,50,true);
+		ProfugoEntrenado entrenado=new ProfugoEntrenado(base);
+		entrenado.recibirProteccionLegal();//Inocencia no puede bajar de 40
+		Zona zona =new Zona("Zona D");
+		zona.agregarProfugo(entrenado);
+		CazadorRural cazador=new CazadorRural("Rural Bravo",80);
+		cazador.realizarCaptura(zona);
+		//La inocencia se reduce pero no puede bajar de 40
+		assertEquals(Integer.valueOf(40),entrenado.getInocencia());
+	}
 
 		
 		
