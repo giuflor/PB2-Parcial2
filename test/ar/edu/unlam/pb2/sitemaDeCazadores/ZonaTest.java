@@ -5,9 +5,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import ar.edu.unlam.pb2.sitemaDeCazadores.cazadores.CazadorRural;
-import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.IProfugo;
 import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.Profugo;
-import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.ProfugoEntrenado;
 import ar.edu.unlam.pb2.sitemaDeCazadores.zona.Zona;
 
 public class ZonaTest {
