@@ -13,7 +13,7 @@ public class Agencia {
 	private HashSet<Cazador> cazadores;
 
 	public Agencia(String nombre) {
-		this.nombre = nombre;
+		this.setNombre(nombre);
 		this.cazadores = new HashSet<>();
 	}
 
@@ -60,6 +60,14 @@ public class Agencia {
 
 	public HashSet<Cazador> getCazadores() {
 		return cazadores;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 }

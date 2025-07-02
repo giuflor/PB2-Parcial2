@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.List;
 
 import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.IProfugo;
-import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.Profugo;
 
 public class Zona {
 	private String nombre;
