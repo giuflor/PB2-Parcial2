@@ -1,6 +1,7 @@
 package ar.edu.unlam.pb2.sitemaDeCazadores.zona;
 
 import java.util.HashSet;
+import java.util.List;
 
 import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.IProfugo;
 import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.Profugo;
@@ -17,7 +18,11 @@ public class Zona {
 	public void agregarProfugo(IProfugo profugo) {
 		this.profugos.add(profugo);
 	}
-
+	
+	public void agregarProfugos(List<IProfugo> profugos) {
+		this.profugos.addAll(profugos);
+	}
+	
 	public void removerProfugo(IProfugo profugo) {
 		this.profugos.remove(profugo);
 	}
