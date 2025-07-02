@@ -41,5 +41,12 @@ public class ProfugoTest {
 		assertEquals(Integer.valueOf(40), evolucionado.getInocencia());
 		assertFalse(evolucionado.isNervioso());
 	}
+	
+	@Test
+	public void queLaInocenciaNoSeaNegativa() {
+	    Profugo profugo = new Profugo("Smith", 1, 50, false);
+	    profugo.reducirInocencia(10);
+	    assertEquals(Integer.valueOf(0), profugo.getInocencia());
+	}
 
 }
