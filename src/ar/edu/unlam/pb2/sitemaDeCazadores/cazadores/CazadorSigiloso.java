@@ -23,5 +23,4 @@ public class CazadorSigiloso extends Cazador {
 		profugo.reducirInocencia(2);
 		profugo.reducirHabilidad(5);
 	}
-
 }
