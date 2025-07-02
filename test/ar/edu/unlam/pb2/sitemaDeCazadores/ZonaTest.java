@@ -45,7 +45,7 @@ public class ZonaTest {
 	}
 
 	@Test
-	public void queSePuedaRemoverUnProfugoDeLaZona(){
+	public void queSePuedaRemoverUnProfugoDeLaZona() {
 		Zona zona = new Zona("Zona Oeste");
 		Profugo profugo = new Profugo("Smith", 30, 40, false);
 
@@ -54,15 +54,16 @@ public class ZonaTest {
 
 		assertTrue(zona.getProfugos().isEmpty());
 	}
-	
+
 	@Test(expected = ExceptionElProfugoNoEstaEnLaZona.class)
-	public void queNoSePuedaRemoverUnProfugoQueNoEstaEnLaZona() throws ExceptionElProfugoNoEstaEnLaZona{
+	public void queNoSePuedaRemoverUnProfugoQueNoEstaEnLaZona() throws ExceptionElProfugoNoEstaEnLaZona {
 		Zona zona = new Zona("Zona Oeste");
 		Profugo profugo = new Profugo("Smith", 30, 40, false);
 
 		zona.removerProfugo(profugo);
 	}
 
+	@Test
 	public void queLaZonaActualiceElListadoDeProfugosDespuesDeVariasCapturas() {
 		Zona zona = new Zona("Zona Este");
 
@@ -87,6 +88,5 @@ public class ZonaTest {
 
 		assertTrue(zona.getProfugos().isEmpty());
 	}
-	
-	
+
 }
