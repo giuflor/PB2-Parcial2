@@ -48,5 +48,12 @@ public class ProfugoTest {
 	    profugo.reducirInocencia(10);
 	    assertEquals(Integer.valueOf(0), profugo.getInocencia());
 	}
+	
+	@Test
+	public void queLaHabilidadNoSeaNegativa() {
+	    Profugo profugo = new Profugo("John", 50, 4, false);
+	    profugo.reducirHabilidad(10);
+	    assertEquals(Integer.valueOf(0), profugo.getHabilidad());
+	}
 
 }
