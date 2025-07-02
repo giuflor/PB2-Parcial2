@@ -33,7 +33,7 @@ public abstract class Cazador {
 
 	protected abstract void intimidar(IProfugo profugo);
 
-	public void realizarCaptura(Zona zona) throws ExceptionCapturaFallida, ExceptionElProfugoYaFueCapturado{
+	public void realizarCaptura(Zona zona) throws ExceptionCapturaFallida, ExceptionElProfugoYaFueCapturado {
 		if (zona == null) {
 			throw new ExceptionCapturaFallida();
 		}
@@ -81,7 +81,6 @@ public abstract class Cazador {
 	public ArrayList<IProfugo> getCapturados() {
 		return new ArrayList<IProfugo>(capturados);
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {

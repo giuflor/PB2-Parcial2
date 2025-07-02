@@ -15,3 +15,4 @@ public interface IProfugo {
 
 	void setIsNervioso(boolean nervioso);
 }
+

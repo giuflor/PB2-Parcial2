@@ -24,9 +24,11 @@ public class ProfugoEntrenadoTest {
 		Zona zona = new Zona("Zona Protegida");
 		zona.agregarProfugo(entrenado);
 		CazadorRural cazador = new CazadorRural("Rural Pro", 70);
+		// El cazador rural intenta intimidar al profugo entrenado y le baja la
+		// inocencia 2 puntos
+		// 50 - 2 = 48
 		cazador.realizarCaptura(zona);
-		// la inocencia se reduce pero no puede bajar de 40
-		assertEquals(Integer.valueOf(40), entrenado.getInocencia());
+		assertEquals(Integer.valueOf(48), entrenado.getInocencia());
 		// El cazador rural vuelve nervioso al profugo,pero como tiene elite,sigue sin
 		// ser nervioso
 		assertFalse(entrenado.isNervioso());
@@ -65,7 +67,7 @@ public class ProfugoEntrenadoTest {
 
 	@Test
 	public void queProteccionLegalMantengaMinimoDeInocenciaAlIntimidar() {
-		Profugo base = new Profugo("Protegido", 42, 50, true);
+		Profugo base = new Profugo("Protegido", 41, 50, false);
 		ProfugoEntrenado entrenado = new ProfugoEntrenado(base);
 		entrenado.recibirProteccionLegal();// Inocencia no puede bajar de 40
 		Zona zona = new Zona("Zona D");
