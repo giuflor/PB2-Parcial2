@@ -18,7 +18,9 @@ public class Agencia {
 	}
 
 	public void agregarCazador(Cazador cazador) {
-		this.cazadores.add(cazador);
+		if (cazador != null) {
+			this.cazadores.add(cazador);
+		}
 	}
 
 	public List<IProfugo> obtenerTodosLosProfugosCapturados() {
@@ -32,7 +34,7 @@ public class Agencia {
 	public IProfugo obtenerProfugoMasHabilCapturado() {
 
 		IProfugo masHabil = null;
-		int maxHabilidad = Integer.MIN_VALUE;
+		int maxHabilidad = -1;
 
 		for (Cazador cazador : cazadores) {
 			for (IProfugo profugo : cazador.getCapturados()) {
@@ -47,7 +49,7 @@ public class Agencia {
 
 	public Cazador obtenerCazadorConMasCapturas() {
 		Cazador mejor = null;
-		int maxCapturas = 0;
+		int maxCapturas = -1;
 
 		for (Cazador cazador : cazadores) {
 			if (cazador.getCapturados().size() > maxCapturas) {
