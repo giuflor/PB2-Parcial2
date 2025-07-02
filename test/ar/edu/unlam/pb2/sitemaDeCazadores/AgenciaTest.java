@@ -139,4 +139,17 @@ public class AgenciaTest {
 		assertTrue(nombre.equals("Rick") || nombre.equals("Daryl"));
 	}
 
+	@Test
+	public void queNoSeAgreguenCazadoresDuplicadosEnLaAgencia() {
+		Agencia agencia = new Agencia("Seguridad");
+
+		CazadorUrbano cazador1 = new CazadorUrbano("Rick", 80);
+		CazadorUrbano cazador2 = new CazadorUrbano("Rick", 80); // Mismo nombre
+
+		agencia.agregarCazador(cazador1);
+		agencia.agregarCazador(cazador2);
+
+		assertEquals(1, agencia.getCazadores().size());
+	}
+
 }
