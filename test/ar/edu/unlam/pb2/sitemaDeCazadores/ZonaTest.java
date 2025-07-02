@@ -47,4 +47,6 @@ public class ZonaTest {
 
 		assertTrue(zona.getProfugos().isEmpty());
 	}
+	
+	
 }
