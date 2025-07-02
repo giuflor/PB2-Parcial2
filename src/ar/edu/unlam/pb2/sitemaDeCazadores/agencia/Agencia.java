@@ -6,6 +6,7 @@ import java.util.List;
 
 import ar.edu.unlam.pb2.sitemaDeCazadores.cazadores.Cazador;
 import ar.edu.unlam.pb2.sitemaDeCazadores.excepciones.ExceptionAgenciaSinCazadores;
+import ar.edu.unlam.pb2.sitemaDeCazadores.excepciones.ExceptionAgenciaSinProfugosCapturados;
 import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.IProfugo;
 
 public class Agencia {
