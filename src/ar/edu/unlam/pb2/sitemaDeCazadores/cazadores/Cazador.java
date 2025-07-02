@@ -6,6 +6,7 @@ import java.util.List;
 
 import ar.edu.unlam.pb2.sitemaDeCazadores.excepciones.ExceptionCapturaFallida;
 import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.IProfugo;
+import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.Profugo;
 import ar.edu.unlam.pb2.sitemaDeCazadores.zona.Zona;
 
 public abstract class Cazador {
@@ -32,34 +33,32 @@ public abstract class Cazador {
 
 	protected abstract void intimidar(IProfugo profugo);
 
-	public void realizarCaptura(Zona zona) throws ExceptionCapturaFallida {
+	public void realizarCaptura(Zona zona) {
 		if (zona == null) {
 			throw new ExceptionCapturaFallida();
 		}
 
-		List<IProfugo> aCapturar = new ArrayList<>();
-		List<IProfugo> profugosZona = new ArrayList<>(zona.getProfugos());
-		List<Integer> habilidadesIntimidados = new ArrayList<>();
+		List<Profugo> profugosACapturar = new ArrayList<>();
+		int minHabilidadIntimidado = Integer.MAX_VALUE;
 
-		for (IProfugo profugo : profugosZona) {
+		for (IProfugo profugo : new ArrayList<>(zona.getProfugos())) {
 			if (this.experiencia > profugo.getInocencia() && puedeCapturar(profugo)) {
 				capturados.add(profugo);
-				aCapturar.add(profugo);
+				profugosACapturar.add((Profugo) profugo);
 			} else if (this.experiencia > profugo.getInocencia() && !intimidados.contains(profugo)) {
 				intimidar(profugo);
 				intimidados.add(profugo);
-				habilidadesIntimidados.add(profugo.getHabilidad());
+				minHabilidadIntimidado = Math.min(minHabilidadIntimidado, profugo.getHabilidad());
 			}
 		}
 
-		// Remover capturados de la zona
-		for (IProfugo p : aCapturar) {
-			zona.removerProfugo(p);
+		for (Profugo profugo : profugosACapturar) {
+			zona.removerProfugo(profugo);
 		}
 
-		// Sumar experiencia
-		int minHabilidad = habilidadesIntimidados.stream().min(Integer::compare).orElse(0);
-		this.experiencia += minHabilidad + (2 * aCapturar.size());
+		int experienciaGanada = (minHabilidadIntimidado == Integer.MAX_VALUE ? 0 : minHabilidadIntimidado)
+				+ (2 * profugosACapturar.size());
+		this.experiencia += experienciaGanada;
 	}
 
 	public boolean contieneCaptura(IProfugo profugo) {
@@ -99,4 +98,3 @@ public abstract class Cazador {
 		return nombre.hashCode();
 	}
 }
-
