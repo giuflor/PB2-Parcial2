@@ -77,12 +77,11 @@ public abstract class Cazador {
 		return new ArrayList<IProfugo>(capturados);
 	}
 
-	public void agregarCaptura(IProfugo profugo) {
-		if (!capturados.contains(profugo)) {
-			capturados.add(profugo);
-		} else {
-			throw new RuntimeException("El prófugo ya fue capturado.");
-		}
+	public void agregarCaptura(Profugo profugo) {
+	    if (profugo == null) throw new IllegalArgumentException("El prófugo no puede ser nulo.");
+	    if (!capturados.add(profugo)) {
+	        throw new RuntimeException("El prófugo ya fue capturado.");
+	    }
 	}
 
 	@Override
