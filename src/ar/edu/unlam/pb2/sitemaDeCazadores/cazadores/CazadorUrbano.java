@@ -1,6 +1,6 @@
 package ar.edu.unlam.pb2.sitemaDeCazadores.cazadores;
 
-import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.Profugo;
+import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.IProfugo;
 
 public class CazadorUrbano extends Cazador {
 
@@ -14,12 +14,12 @@ public class CazadorUrbano extends Cazador {
 	}
 
 	@Override
-	public boolean puedeCapturar(Profugo profugo) {
+	public boolean puedeCapturar(IProfugo profugo) {
 		return !profugo.isNervioso();
 	}
 
 	@Override
-	protected void intimidar(Profugo profugo) {
+	protected void intimidar(IProfugo profugo) {
 		profugo.reducirInocencia(2);
 		profugo.setIsNervioso(false);
 	}
