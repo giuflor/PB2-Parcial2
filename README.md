@@ -112,5 +112,14 @@ El proyecto incluye:
 - ✅ queElHashCodeDeProfugosConElMismoNombreSeaIgual
 - ✅ queLosAtributosSeGuardenCorrectamente
 
+---
 
+### 🗺 **ZonaTest**
+- ✅ queZonaPermitaCapturarYReducirProfugos
+- ✅ queSeAgregueUnProfugoALaZona
+- ✅ queNoSeAgreguenProfugosDuplicadosALaZona *(ExceptionElProfugoYaEstaEnLaZona)*
+- ✅ queSePuedaRemoverUnProfugoDeLaZona
+- ✅ queNoSePuedaRemoverUnProfugoQueNoEstaEnLaZona *(ExceptionElProfugoNoEstaEnLaZona)*
+- ✅ queLaZonaActualiceElListadoDeProfugosDespuesDeVariasCapturas
+- ✅ queLaZonaPuedaEstarVaciaSinErrores
 
