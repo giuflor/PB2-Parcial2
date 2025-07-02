@@ -61,5 +61,13 @@ public class ProfugoTest {
 	    profugo.setIsNervioso(false);
 	    assertFalse(profugo.isNervioso());
 	}
+	@Test
+	public void queDosProfugosConElMismoNombreSeanIguales() {
+	    Profugo profugo1 = new Profugo("Smith", 30, 50, false);
+	    Profugo profugo2 = new Profugo("Smith", 40, 60, true);
+
+	    assertTrue(profugo1.equals(profugo2));
+	}
+	
 
 }
