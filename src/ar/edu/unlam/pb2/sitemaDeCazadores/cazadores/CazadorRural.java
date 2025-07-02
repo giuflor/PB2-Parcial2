@@ -21,7 +21,7 @@ public class CazadorRural extends Cazador {
 	@Override
 	protected void intimidar(IProfugo profugo) {
 		profugo.reducirInocencia(2);
-        profugo.setIsNervioso(true);
+		profugo.setIsNervioso(true);
 	}
 
 }

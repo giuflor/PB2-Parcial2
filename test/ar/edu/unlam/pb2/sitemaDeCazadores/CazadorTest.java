@@ -1,7 +1,11 @@
 package ar.edu.unlam.pb2.sitemaDeCazadores;
 
-import static org.junit.Assert.*;
-import java.util.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -10,8 +14,9 @@ import ar.edu.unlam.pb2.sitemaDeCazadores.cazadores.CazadorRural;
 import ar.edu.unlam.pb2.sitemaDeCazadores.cazadores.CazadorSigiloso;
 import ar.edu.unlam.pb2.sitemaDeCazadores.cazadores.CazadorUrbano;
 import ar.edu.unlam.pb2.sitemaDeCazadores.excepciones.ExceptionCapturaFallida;
-import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.Profugo;
+import ar.edu.unlam.pb2.sitemaDeCazadores.excepciones.ExceptionElProfugoYaFueCapturado;
 import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.IProfugo;
+import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.Profugo;
 import ar.edu.unlam.pb2.sitemaDeCazadores.zona.Zona;
 
 public class CazadorTest {
@@ -86,8 +91,8 @@ public class CazadorTest {
 		assertTrue(zona.contieneProfugo(profugo));
 	}
 
-	@Test
-	public void queUnCazadorNoRepitaCapturaDelMismoProfugo() {
+	@Test(expected = ExceptionElProfugoYaFueCapturado.class)
+	public void queLanceExceptionSiUnCazadorIntentaCapturarUnMismoProfugoCapturado() throws ExceptionElProfugoYaFueCapturado{
 		Zona zona = new Zona("Centro");
 
 		zona.agregarProfugo(this.profugo);
@@ -97,9 +102,6 @@ public class CazadorTest {
 		// lo volvemos a agregar (no debería volver a capturarlo)
 		zona.agregarProfugo(this.profugo);
 		this.cazadorUrbano.realizarCaptura(zona);
-
-		// solo una vez
-		assertEquals(1, this.cazadorUrbano.getCapturados().size());
 	}
 
 	@Test
@@ -135,5 +137,77 @@ public class CazadorTest {
 		// No debería volver a intimidar
 		assertEquals((Integer) habilidadDespues, profugo.getHabilidad());
 	}
+	
+	
+	@Test
+	public void queElCazadorCaptureEIntimideEnLaMismaZonaYCalculeBienLaExperiencia() {
+	    // Cazador con experiencia 80
+	    CazadorUrbano cazador = new CazadorUrbano("Rick", 80);
 
+	    // Profugo capturable (inocencia 50 < experiencia 80, no nervioso)
+	    Profugo capturable = new Profugo("Capturable", 50, 40, false);
+
+		// Profugo no capturable pero intimidable (inocencia 50 < experiencia 80, es nervioso)
+	    Profugo intimidar = new Profugo("Intimidar", 50, 60, true);
+
+	    Zona zona = new Zona("Zona Centro");
+	    zona.agregarProfugo(capturable);
+	    zona.agregarProfugo(intimidar);
+
+	    cazador.realizarCaptura(zona);
+
+	    // El capturable debería estar capturado
+	    assertTrue(cazador.getCapturados().contains(capturable));
+	    // El intimidado debería seguir en la zona
+	    assertTrue(zona.getProfugos().contains(intimidar));
+	    // La experiencia esperada es: min habilidad de intimidados (60) + 2 * cantidad de capturas (2 * 1)
+	    Integer experienciaEsperada = 80 + 60 + 2;
+
+	    assertEquals(experienciaEsperada, cazador.getExperiencia());
+	}
+
+	@Test
+	public void queUnCazadorNoPuedaCapturarUnProfugoConHabilidadCero() {
+		Profugo profugoIncapaz = new Profugo("Incapaz", 0, 0, false);
+		Zona zona = new Zona("Desierto");
+
+		zona.agregarProfugo(profugoIncapaz);
+
+		this.cazadorRural.realizarCaptura(zona);
+
+		// El profugo no debería ser capturado ni intimidado
+		assertEquals((Integer) 0, profugoIncapaz.getInocencia());
+		assertEquals((Integer) 0, profugoIncapaz.getHabilidad());
+		assertFalse(this.cazadorRural.contieneCaptura(profugoIncapaz));
+		assertTrue(zona.contieneProfugo(profugoIncapaz));
+	}
+
+	@Test
+	public void queUnCazadorNoCaptureSiSuExperienciaEsIgualALaInocenciaDelProfugo() {
+		Profugo profugo = new Profugo("Empate", 80, 50, false);
+		Zona zona = new Zona("Plaza");
+
+		zona.agregarProfugo(profugo);
+
+		this.cazadorUrbano.realizarCaptura(zona);
+
+		assertFalse(this.cazadorUrbano.contieneCaptura(profugo));
+		assertTrue(zona.contieneProfugo(profugo));
+	}
+
+	@Test
+	public void queUnCazadorUrbanoNoSeaIgualQueUnCazadorRuralAunqueTenganElMismoNombre() {
+		CazadorUrbano cazadorUrbano = new CazadorUrbano("Hunter", 100);
+		CazadorRural cazadorRural = new CazadorRural("Hunter", 100);
+
+		assertNotEquals(cazadorUrbano, cazadorRural);
+	}
+
+	@Test
+	public void queUnCazadorUrbanoSeaIgualQueOtroConElMismoNombre() {
+		CazadorUrbano cazadorUrbano = new CazadorUrbano("Hunter", 100);
+		CazadorUrbano cazadorUrbano2 = new CazadorUrbano("Hunter", 100);
+
+		assertEquals(cazadorUrbano, cazadorUrbano2);
+	}
 }

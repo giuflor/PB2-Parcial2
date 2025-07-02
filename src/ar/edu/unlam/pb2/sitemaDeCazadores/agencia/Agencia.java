@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 
 import ar.edu.unlam.pb2.sitemaDeCazadores.cazadores.Cazador;
+import ar.edu.unlam.pb2.sitemaDeCazadores.excepciones.ExceptionAgenciaSinCazadores;
+import ar.edu.unlam.pb2.sitemaDeCazadores.excepciones.ExceptionAgenciaSinProfugosCapturados;
 import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.IProfugo;
 
 public class Agencia {
@@ -18,7 +20,9 @@ public class Agencia {
 	}
 
 	public void agregarCazador(Cazador cazador) {
-		this.cazadores.add(cazador);
+		if (cazador != null) {
+			this.cazadores.add(cazador);
+		}
 	}
 
 	public List<IProfugo> obtenerTodosLosProfugosCapturados() {
@@ -29,10 +33,10 @@ public class Agencia {
 		return todos;
 	}
 
-	public IProfugo obtenerProfugoMasHabilCapturado() {
+	public IProfugo obtenerProfugoMasHabilCapturado() throws ExceptionAgenciaSinProfugosCapturados {
 
 		IProfugo masHabil = null;
-		int maxHabilidad = Integer.MIN_VALUE;
+		int maxHabilidad = -1;
 
 		for (Cazador cazador : cazadores) {
 			for (IProfugo profugo : cazador.getCapturados()) {
@@ -42,12 +46,19 @@ public class Agencia {
 				}
 			}
 		}
+		if (masHabil == null) {
+			throw new ExceptionAgenciaSinProfugosCapturados();
+		}
 		return masHabil;
 	}
 
-	public Cazador obtenerCazadorConMasCapturas() {
+	public Cazador obtenerCazadorConMasCapturas() throws ExceptionAgenciaSinCazadores{
+		if (cazadores.isEmpty()) {
+			throw new ExceptionAgenciaSinCazadores();
+		}
+		
 		Cazador mejor = null;
-		int maxCapturas = 0;
+		int maxCapturas = -1;
 
 		for (Cazador cazador : cazadores) {
 			if (cazador.getCapturados().size() > maxCapturas) {
@@ -69,5 +80,4 @@ public class Agencia {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
 }

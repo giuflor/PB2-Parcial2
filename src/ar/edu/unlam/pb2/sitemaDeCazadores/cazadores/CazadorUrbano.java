@@ -23,5 +23,4 @@ public class CazadorUrbano extends Cazador {
 		profugo.reducirInocencia(2);
 		profugo.setIsNervioso(false);
 	}
-
 }
