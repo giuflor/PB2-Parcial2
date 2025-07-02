@@ -6,6 +6,7 @@ import static org.junit.Assert.assertFalse;
 import org.junit.Test;
 
 import ar.edu.unlam.pb2.sitemaDeCazadores.cazadores.CazadorRural;
+import ar.edu.unlam.pb2.sitemaDeCazadores.cazadores.CazadorSigiloso;
 import ar.edu.unlam.pb2.sitemaDeCazadores.cazadores.CazadorUrbano;
 import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.Profugo;
 import ar.edu.unlam.pb2.sitemaDeCazadores.profugos.ProfugoEntrenado;
@@ -44,4 +45,22 @@ public class ProfugoEntrenadoTest {
 		assertTrue(cazador.getCapturados().contains(entrenado));
 		assertTrue(zona.getProfugos().isEmpty());
 	}
+	@Test
+	public void queCazadorNoCaptureNiIntimideSiInocenciaSuperaExperienciaAunConEntrenamiento() {
+		Profugo base= new Profugo("Inmune",90,10,true);
+		ProfugoEntrenado entrenado =new ProfugoEntrenado(base);
+		entrenado.recibirProteccionLegal();//No puede bajar de 40 inocencia
+		Zona zona =new Zona("Zona C");
+		zona.agregarProfugo(entrenado);
+		CazadorSigiloso cazador =new CazadorSigiloso("Sigiloso Bajo",60);
+		cazador.realizarCaptura(zona);
+		//no debe capturar ni intimidarlo
+		assertFalse(cazador.getCapturados().contains(entrenado));
+		assertTrue(zona.getProfugos().contains(entrenado));
+		
+	}
+
+		
+		
+	
 }
