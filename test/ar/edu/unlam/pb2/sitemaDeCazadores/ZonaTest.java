@@ -40,4 +40,11 @@ public class ZonaTest {
 		// Después de la captura, la zona debe estar vacía
 		assertTrue(zona.getProfugos().isEmpty());
 	}
+
+	@Test
+	public void queLaZonaPuedaEstarVaciaSinErrores() {
+		Zona zona = new Zona("Zona Desierta");
+
+		assertTrue(zona.getProfugos().isEmpty());
+	}
 }
