@@ -102,17 +102,41 @@ public class AgenciaTest {
 		assertEquals(3, agencia.obtenerTodosLosProfugosCapturados().size()); // Total de profugos capturados
 		assertTrue(nombreDelMejorCazador.equals("Rick"));
 	}
-	
+
 	@Test
 	public void queLaAgenciaDevuelvaNullSiNoHayCapturados() {
-	    Agencia agencia = new Agencia("Agencia Vacía");
+		Agencia agencia = new Agencia("Agencia Vacía");
 
-	    CazadorUrbano cazador = new CazadorUrbano("Rick", 80);
-	    agencia.agregarCazador(cazador);
+		CazadorUrbano cazador = new CazadorUrbano("Rick", 80);
+		agencia.agregarCazador(cazador);
 
-	    assertEquals(null, agencia.obtenerProfugoMasHabilCapturado());
+		assertEquals(null, agencia.obtenerProfugoMasHabilCapturado());
 	}
-	
-	
+
+	@Test
+	public void queLaAgenciaElijaUnoEnCasoDeEmpateDeCapturas() {
+		Agencia agencia = new Agencia("Agencia Empate");
+
+		CazadorUrbano cazador1 = new CazadorUrbano("Rick", 80);
+		CazadorRural cazador2 = new CazadorRural("Daryl", 80);
+
+		agencia.agregarCazador(cazador1);
+		agencia.agregarCazador(cazador2);
+
+		Profugo p1 = new Profugo("Smith", 50, 30, false);
+		Profugo p2 = new Profugo("John", 50, 30, true);
+
+		Zona zona1 = new Zona("Zona 1");
+		Zona zona2 = new Zona("Zona 2");
+
+		zona1.agregarProfugo(p1);
+		zona2.agregarProfugo(p2);
+
+		cazador1.realizarCaptura(zona1);
+		cazador2.realizarCaptura(zona2);
+
+		String nombre = agencia.obtenerCazadorConMasCapturas().getNombre();
+		assertTrue(nombre.equals("Rick") || nombre.equals("Daryl"));
+	}
 
 }
